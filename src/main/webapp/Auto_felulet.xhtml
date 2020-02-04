@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            
+            </link>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form>
+            <div class="card">
+                <div class="card-header">
+                    <p class="h1 text-left font-italic">Autók</p>
+                </div>
+                <div class="card-body">
+                  
+                    <h:form>
+                        <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.autoList}" var = "o">
+
+                            <p:ajax event="click" listener="#{Auto2bean.addAction}"/>
+
+                            <h:column>    				
+                                <f:facet name = "header">Rendszám </f:facet>
+                               <h:outputText value="#{o.rendszam}"/>
+                            </h:column>
+
+                            <h:column>
+                               <f:facet name = "header">Márka </f:facet>
+                               <h:outputText value="#{o.marka}"/>
+                            </h:column>
+
+                            <h:column>
+                               <f:facet name = "header">Típus</f:facet>
+                               <h:outputText value="#{o.tipus}"/>
+                            </h:column>
+
+                            <h:column>
+                               <f:facet name = "header">Szín </f:facet>
+                               <h:outputText value="#{o.szin}"/>
+                            </h:column>
+
+                            <h:column>
+                               <f:facet name = "header">Parkoló </f:facet>
+                               <h:outputText value="#{o.parkolo}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name = "header">ParkKezd </f:facet>
+                                <h:outputText value="#{o.parkol_kezd}"/>
+                            </h:column>
+                                        
+                            <h:column>
+                                <f:facet name = "header">ParkVég </f:facet>
+                                <h:outputText value="#{o.parkol_veg}"/>
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </h:form>
+                    
+                </div>
+                                               
+            </div>
+            
+            <div class="container">
+                    
+                    <div class="row">
+                        <div class="col-sm">
+                          <h:form>
+                              <h:commandButton class="btn btn-primary" value="Auto hozzáadás" type="button" onclick="PF('dlg1').show();" />
+                          </h:form>
+                        </div>
+                        <div class="col-sm">
+                          <h:form>
+                              <h:commandButton class="btn btn-primary" value="Auto törlés" type="button" onclick="PF('dlg2').show();" />
+                          </h:form>
+                        </div>
+                        <div class="col-sm">
+                          <h:form>
+                              <h:commandButton class="btn btn-primary" value="Parkoló" action="Parkolo_felulet"/>
+                          </h:form>
+                        </div>
+                        
+                        <h:form>
+                              <p:dialog header="Hiba" widgetVar="megtelt1" >
+                                 <h:outputText id="asd" value="A parkolóban már szerepel ezen rendszámú autó, kérem válasszon másikat"/><br></br>
+                                 <p:commandButton class="btn btn-primary btn-sm" value="Ok" onclick="PF('megtel1').hide();"/>
+                              </p:dialog>
+                        </h:form>
+                        
+                        <h:form >    
+                            <p:dialog header="Auto +" widgetVar="dlg1" minHeight="40">
+                                <h:outputText value="Kérem adja meg az autó adatait" /><br></br>
+                                <p:separator />
+
+                                    Rendszám: <br></br> <h:inputText value="#{Auto2bean.rendszam}" /> <br></br>
+                                    Márka: <br></br>    <h:inputText value="#{Auto2bean.marka}" />    <br></br>
+                                    Típus: <br></br>    <h:inputText value="#{Auto2bean.tipus}" />    <br></br>
+                                    Szín: <br></br>     <h:inputText value="#{Auto2bean.szin}" />     <br></br>
+
+                                <br></br>
+                                
+                                <p:commandButton class="btn btn-primary" value="Mentés" action="#{Auto2bean.addAction}" onclick="PF('dlg1').hide();">
+
+                                </p:commandButton>
+                            </p:dialog>
+                        </h:form>
+                        
+                        <h:form>    
+                            <p:dialog header="Auto -" widgetVar="dlg2" minHeight="40">
+                                <h:outputText value="Kérem adja meg a törelndő autó adatait" /><br></br>
+                                <br></br>
+
+                                Rendszám: <br></br> <h:inputText id="rednsz" value="#{Auto2bean.rendszam}" /> <br></br>
+
+                                <p:separator />
+                                <p:commandButton class="btn btn-primary" value="Törlés" action="#{Auto2bean.deleteAction(Auto2bean.rendszam)}" onclick="PF('dlg2').hide();">
+                                    <f:ajax execute="rendsz"/>
+                                </p:commandButton>
+                            </p:dialog>
+                        </h:form>
+                        
+                        <h:form>
+                            <p:dialog header="Hiba" widgetVar="requestRendsz" >
+                                <h:outputText value="A rendszám paraméter megadása kötelező"/><br></br>
+                                <p:commandButton class="btn btn-primary btn-sm" value="Ok" onclick="PF('requestRendsz').hide();PF('dlg2').show();"/>
+                            </p:dialog>
+                        </h:form>
+                        
+                        <h:form>
+                            <p:dialog header="Hiba" widgetVar="uresAutoAdd" >
+                                <h:outputText value="Minden paraméter megadása kötelező"/><br></br>
+                                <p:commandButton class="btn btn-primary btn-sm" value="Ok" onclick="PF('uresAutoAdd').hide();PF('dlg1').show();"/>
+                            </p:dialog>
+                        </h:form>
+                        
+                    </div>
+                    
+            </div>
+        </h:form>
+        </h:body>
+        
+        <div class="card text-center">
+            
+                <div class="card-body">
+                  <h:form>
+                    <h:commandButton class="btn btn-primary btn-lg btn-block" value="Vissza" action="index"></h:commandButton>
+                  </h:form>
+                </div>
+            
+            </div>
+    </f:view>
+</html>
+
