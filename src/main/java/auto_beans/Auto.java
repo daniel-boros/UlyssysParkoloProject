@@ -18,8 +18,6 @@ public class Auto {
             public String tipus;
             public String szin;
             public String parkolo;
-            public String parkol_kezd;
-            public String parkol_veg;
             public Date parkKezd;
             public Date parkVeg;
             
@@ -55,22 +53,6 @@ public class Auto {
                 this.parkVeg = parkVeg;
             }
             
-            public String getParkol_kezd() {
-                return parkol_kezd;
-            }
-
-            public void setParkol_kezd(String parkol_kezd) {
-                this.parkol_kezd = parkol_kezd;
-            }
-
-            public String getParkol_veg() {
-                return parkol_veg;
-            }
-
-            public void setParkol_veg(String parkol_veg) {
-                this.parkol_veg = parkol_veg;
-            }           
-
             public String getParkolo() {
                 return parkolo;
             }

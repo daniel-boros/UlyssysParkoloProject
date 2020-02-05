@@ -14,8 +14,9 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import org.primefaces.context.RequestContext;
+import org.primefaces.context.PrimeRequestContext;
 import java.lang.Object;
+import org.primefaces.PrimeFaces;
         
 
 /**
@@ -33,8 +34,6 @@ public class Auto2 implements Serializable {
 	public String tipus;
 	public String szin;
         public String parkolo;
-        public String parkol_kezd;
-        public String parkol_veg;
         public Date parkKezd;
         public Date parkVeg;
         public ArrayList<String> parkoloKocsikList = new ArrayList<String>();
@@ -64,8 +63,9 @@ public class Auto2 implements Serializable {
 			this.tipus, this.szin);
                                 
                 if (uj.rendszam.isEmpty() || uj.marka.isEmpty() || uj.tipus.isEmpty() || uj.szin.isEmpty()) {
-                    RequestContext context = RequestContext.getCurrentInstance();
-                    context.execute("PF('uresAutoAdd').show();");
+                    PrimeRequestContext context = PrimeRequestContext.getCurrentInstance();
+                    //context.execute("PF('uresAutoAdd').show();");
+                    PrimeFaces.current().executeScript("PF('uresAutoAdd').show();");
                     return;
                 }
                 
@@ -90,8 +90,8 @@ public class Auto2 implements Serializable {
         public void deleteAction(String rendsza) {
 	    
                 if (rendsza == null || rendsza.isEmpty()) {
-                    RequestContext context = RequestContext.getCurrentInstance();
-                    context.execute("PF('requestRendsz').show();");
+                    //RequestContext context = RequestContext.getCurrentInstance();
+                    //context.execute("PF('requestRendsz').show();");
                 }
             
 		for (int i = 0; i < autoList.size(); i++) {
@@ -115,8 +115,8 @@ public class Auto2 implements Serializable {
             System.out.println(b_rendszam + "|" + b_parkolo);
             
             if (b_rendszam.isEmpty() || b_rendszam == null || b_parkolo.isEmpty() || b_parkolo == null) {
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('requestRendsz').show();");
+                //RequestContext context = RequestContext.getCurrentInstance();
+                //context.execute("PF('requestRendsz').show();");
                 return;
             /*if (autoList.get(autoList.indexOf()).parkolo == null) {
                 System.out.println(autoList.get(autoList.indexOf(bemeno)).parkolo + "<-----üres--------");*/
@@ -148,8 +148,8 @@ public class Auto2 implements Serializable {
                 autoList.get(index).setParkolo(b_parkolo);
             } else {
                 System.out.println("dialog meghívva");
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('megtelt1').show();");
+                //RequestContext context = RequestContext.getCurrentInstance();
+                //context.execute("PF('megtelt1').show();");
             }
         }
         
@@ -173,8 +173,8 @@ public class Auto2 implements Serializable {
                 autoList.get(autoList.indexOf(bemeno)).setParkolo("Debrecen");
             } else {
                 System.out.println("dialog meghívva");
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('megtelt1').show();");
+                //RequestContext context = RequestContext.getCurrentInstance();
+                //context.execute("PF('megtelt1').show();");
             }
         }
         public void setParkoloToBudapest(Auto bemeno) {
@@ -197,8 +197,8 @@ public class Auto2 implements Serializable {
                 autoList.get(autoList.indexOf(bemeno)).setParkolo("Budapest");
             } else {
                 System.out.println("dialog meghívva");
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('megtelt1').show();");
+                //RequestContext context = RequestContext.getCurrentInstance();
+                //context.execute("PF('megtelt1').show();");
             }
         }
         public void setParkoloToGyor(Auto bemeno) {
@@ -221,8 +221,8 @@ public class Auto2 implements Serializable {
                 autoList.get(autoList.indexOf(bemeno)).setParkolo("Győr");
             } else {
                 System.out.println("dialog meghívva");
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('megtelt1').show();");
+                //RequestContext context = RequestContext.getCurrentInstance();
+                //context.execute("PF('megtelt1').show();");
             }
         }
         
@@ -279,20 +279,20 @@ public class Auto2 implements Serializable {
             //setParkol_veg(parkolni_vegez);
         }*/
         
-        public void setParkolasTime(String rendsz1, String kezd1, String veg1) {
+        public void setParkolasTime(String rendsz1, Date kezd1, Date veg1) {
             System.out.println("kezd: " + kezd1 + " vég: " + veg1 + " | " + rendsz1);
             
             if (rendsz1 == null || kezd1 == null || veg1 == null) {
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('requestParkTime').show();");
+                //RequestContext context = RequestContext.getCurrentInstance();
+                //context.execute("PF('requestParkTime').show();");
                 return;
             }
             
             for (int i = 0; i < autoList.size(); i++) {
                 if (autoList.get(i).rendszam != null){
                     if (autoList.get(i).rendszam.compareTo(rendsz1) == 0) {
-                            autoList.get(i).setParkol_kezd(kezd1);
-                            autoList.get(i).setParkol_veg(veg1);
+                            autoList.get(i).setParkKezd(kezd1);
+                            autoList.get(i).setParkVeg(veg1);
                             System.out.println("beállítás sikeres");
                     }
                 }
@@ -340,35 +340,13 @@ public class Auto2 implements Serializable {
             this.parkVeg = parkVeg;
         }
         
-       
-
-        public String getParkol_kezd() {
-            return parkol_kezd;
-        }
-
-        public void setParkol_kezd(String kezd1) {
-            System.out.println("setParkol_kezd mehívva");
-            this.parkol_kezd = kezd1;
-            System.out.println("---" + getParkol_kezd());
-        }
-
-        public String getParkol_veg() {
-            return parkol_veg;
-        }
-
-        public void setParkol_veg(String veg1) {
-            System.out.println("setParkol_veg mehívva");
-            this.parkol_veg = veg1;
-            System.out.println("---" + getParkol_veg());
-        }
-        
         public String getParkolo() {
             return parkolo;
         }
         
         public void tesztEcske() {
-            RequestContext context = RequestContext.getCurrentInstance();
-            context.execute("PF('megtelt1').show();");
+            //RequestContext context = RequestContext.getCurrentInstance();
+            //context.execute("PF('megtelt1').show();");
             /*if (bemeno == null) System.out.println("null");*/
             System.out.println("-->> ");
         }

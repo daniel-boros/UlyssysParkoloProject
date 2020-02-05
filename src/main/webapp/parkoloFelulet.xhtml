@@ -45,12 +45,16 @@ and open the template in the editor.
 
                                 <h:column>
                                     <f:facet name = "header">ParkKezd </f:facet>
-                                    <h:outputText value="#{o.parkol_kezd}"/>
+                                    <h:outputText value="#{o.parkKezd}">
+                                        <f:convertDateTime pattern="HH:mm"/>
+                                    </h:outputText>        
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name = "header">ParkVég </f:facet>
-                                    <h:outputText value="#{o.parkol_veg}"/>
+                                    <h:outputText value="#{o.parkVeg}">
+                                        <f:convertDateTime pattern="HH:mm"/>
+                                    </h:outputText>
                                 </h:column>
 
                             </h:dataTable>
@@ -84,12 +88,16 @@ and open the template in the editor.
 
                                 <h:column>
                                     <f:facet name = "header">ParkKezd </f:facet>
-                                    <h:outputText value="#{o.parkol_kezd}"/>
+                                    <h:outputText value="#{o.parkKezd}">
+                                        <f:convertDateTime pattern="HH:mm"/>
+                                    </h:outputText>        
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name = "header">ParkVég </f:facet>
-                                    <h:outputText value="#{o.parkol_veg}"/>
+                                    <h:outputText value="#{o.parkVeg}">
+                                        <f:convertDateTime pattern="HH:mm"/>
+                                    </h:outputText>
                                 </h:column>
 
                             </h:dataTable>
@@ -123,12 +131,16 @@ and open the template in the editor.
 
                                 <h:column>
                                     <f:facet name = "header">ParkKezd </f:facet>
-                                    <h:outputText value="#{o.parkol_kezd}"/>
+                                    <h:outputText value="#{o.parkKezd}">
+                                        <f:convertDateTime pattern="HH:mm"/>
+                                    </h:outputText>        
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name = "header">ParkVég </f:facet>
-                                    <h:outputText value="#{o.parkol_veg}"/>
+                                    <h:outputText value="#{o.parkVeg}">
+                                        <f:convertDateTime pattern="HH:mm"/>
+                                    </h:outputText>
                                 </h:column>                                        
 
                             </h:dataTable>
@@ -142,17 +154,24 @@ and open the template in the editor.
         <p:commandButton value="Parkolás Idő Megadása" type="button" onclick="PF('parkTimeDialog').show();"/>
 
         <h:form>    
-            <p:dialog header="Parkoló" widgetVar="parkDialog" minHeight="40">
+            <p:dialog header="Parkoló" widgetVar="parkDialog" minHeight="40" width="500">
                 <h:outputText value="Kérem adja meg hova és melyik autót szeretné elhelyezni" /><br></br>
                 <br></br>
 
-                Rendszám: <br></br> <h:inputText id="rendsz" value="#{Auto2bean.rendszam}" /> <br></br>
-                Parkolók: <br></br>
+                Rendszám: 
+                <p:selectOneMenu value="#{Auto2bean.rendszam}" style="width:150px">                                            
+                    <f:selectItem itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{Auto2bean.rendszamList}" />
+                </p:selectOneMenu>
 
-                <p:selectOneMenu id="country" value="#{Auto2bean.parkolo}" style="width:150px">                                            
-                    <f:selectItem itemLabel="Válasszon" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{Auto2bean.parkoloList}" />
-                </p:selectOneMenu>      
+                <p:separator />
+                Parkolók: 
+
+                <p:selectOneRadio id="console" value="#{Auto2bean.parkolo}" >
+                        <f:selectItem itemLabel="Debrecen" itemValue="Debrecen" />
+                    <f:selectItem itemLabel="Budapest" itemValue="Budapest" />
+                    <f:selectItem itemLabel="Győőr" itemValue="Győr" />
+                </p:selectOneRadio>    
 
                 <p:separator />
 
@@ -183,12 +202,12 @@ and open the template in the editor.
                 </p:selectOneMenu>
                 <p:separator />
 
-                Kezdete: <h:inputText value="#{Auto2bean.parkol_kezd}" /> <br></br>
-                Vége: <h:inputText value="#{Auto2bean.parkol_veg}" /> <br></br>
+                Kezdés: <p:datePicker value="#{Auto2bean.parkKezd}" timeOnly="true" pattern="HH:mm"/> <br></br>
+                Végzés: <p:datePicker value="#{Auto2bean.parkVeg}" timeOnly="true" pattern="HH:mm"/> <br></br>
+                <p:separator />
+                <p:commandButton update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkolasTime(Auto2bean.rendszam, Auto2bean.parkKezd, Auto2bean.parkVeg)}" onclick="PF('parkTimeDialog').hide()"/>
 
-                <p:commandButton update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkolasTime(Auto2bean.rendszam, Auto2bean.parkol_kezd, Auto2bean.parkol_veg)}" onclick="PF('parkTimeDialog').hide()"/>
-                    
-                    
+
             </p:dialog>
         </h:form>
         <br></br>

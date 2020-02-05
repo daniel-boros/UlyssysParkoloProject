@@ -178,7 +178,12 @@
                             <h:outputText value="Kérem adja meg hova és melyik autót szeretné elhelyezni" /><br></br>
                             <br></br>
                             
-                            Rendszám: <br></br> <h:inputText id="rendsz" value="#{Auto2bean.rendszam}" /> <br></br>
+                            Rendszám: 
+                            <p:selectOneMenu id="country" value="#{Auto2bean.rendszam}" style="width:150px">                                            
+                                    <f:selectItem itemLabel="Válasszon" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{Auto2bean.rendszamList}" />
+                                </p:selectOneMenu>
+                                <p:separator />
                             Parkolók: <br></br>
                             
                             <p:selectOneMenu id="country" value="#{Auto2bean.parkolo}" style="width:150px">                                            

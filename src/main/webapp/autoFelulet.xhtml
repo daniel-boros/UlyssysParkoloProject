@@ -34,33 +34,37 @@
                 </p:column>
 
                 <p:column headerText="Parkoló">
-
                     <h:outputText value="#{car.parkolo}"/>
                 </p:column>
 
                 <p:column headerText="ParkKezd">
-                    <h:outputText value="#{car.parkol_kezd}"/>
+                    <h:outputText value="#{car.parkKezd}">
+                        <f:convertDateTime pattern="HH:mm"/>
+                    </h:outputText>        
                 </p:column>
 
-                <p:column headerText="ParkVég">
-                    <h:outputText value="#{car.parkol_veg}"/>
+                <p:column headerText="ParkKezd">
+                    <h:outputText value="#{car.parkVeg}">
+                        <f:convertDateTime pattern="HH:mm"/>
+                    </h:outputText>
                 </p:column>
+                
             </p:dataTable>
         </h:form>
 
-      
-            <div class="p-grid p-justify-even">
-                <div class="p-col-1">
-                    <p:commandButton class="btn btn-primary" value="Auto hozzáadás" type="button" onclick="PF('autoPlus').show();" />
-                </div>
-                <div class="p-col-2">
-                    <p:commandButton class="btn btn-primary" value="Auto törlés" type="button" onclick="PF('autoMinus').show();" />
-                </div>
-                <div class="p-col-3">
-                    <p:commandButton class="btn btn-primary" value="Parkoló" action="parkoloFelulet"/>
-                </div>
+
+        <div class="p-grid p-justify-even">
+            <div class="p-col-1">
+                <p:commandButton class="btn btn-primary" value="Auto hozzáadás" type="button" onclick="PF('autoPlus').show();" />
             </div>
-      
+            <div class="p-col-2">
+                <p:commandButton class="btn btn-primary" value="Auto törlés" type="button" onclick="PF('autoMinus').show();" />
+            </div>
+            <div class="p-col-3">
+                <p:commandButton class="btn btn-primary" value="Parkoló" action="parkoloFelulet"/>
+            </div>
+        </div>
+
 
         <h:form>
             <p:dialog header="Auto +" widgetVar="autoPlus" minHeight="40">
