@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Carssssss</title>
+
+    </h:head>    
+    <h:body>
+        <h:form id="form1">
+            <p:tabView id="tab1">
+                <p:tab title="Debrecen">
+                    <h:panelGrid id="grid">
+                        <p:layoutUnit position="center">
+                            <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfDebrecen}" var="o">
+
+                                <h:column>    				
+                                    <f:facet name = "header">Rendszám </f:facet>
+                                    <h:outputText value="#{o.rendszam}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Márka </f:facet>
+                                    <h:outputText value="#{o.marka}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Típus</f:facet>
+                                    <h:outputText value="#{o.tipus}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Szín </f:facet>
+                                    <h:outputText value="#{o.szin}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">ParkKezd </f:facet>
+                                    <h:outputText value="#{o.parkol_kezd}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">ParkVég </f:facet>
+                                    <h:outputText value="#{o.parkol_veg}"/>
+                                </h:column>
+
+                            </h:dataTable>
+                        </p:layoutUnit>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Budapest">
+                    <h:panelGrid>
+                        <p:layoutUnit position="center">
+                            <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfBudapest}" var="o">
+
+                                <h:column>    				
+                                    <f:facet name = "header">Rendszám </f:facet>
+                                    <h:outputText value="#{o.rendszam}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Márka </f:facet>
+                                    <h:outputText value="#{o.marka}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Típus</f:facet>
+                                    <h:outputText value="#{o.tipus}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Szín </f:facet>
+                                    <h:outputText value="#{o.szin}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">ParkKezd </f:facet>
+                                    <h:outputText value="#{o.parkol_kezd}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">ParkVég </f:facet>
+                                    <h:outputText value="#{o.parkol_veg}"/>
+                                </h:column>
+
+                            </h:dataTable>
+                        </p:layoutUnit>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Győr">
+                    <h:panelGrid>
+                        <p:layoutUnit position="center">
+                            <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfGyor}" var="o">
+
+                                <h:column>    				
+                                    <f:facet name = "header">Rendszám </f:facet>
+                                    <h:outputText value="#{o.rendszam}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Márka </f:facet>
+                                    <h:outputText value="#{o.marka}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Típus</f:facet>
+                                    <h:outputText value="#{o.tipus}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">Szín </f:facet>
+                                    <h:outputText value="#{o.szin}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">ParkKezd </f:facet>
+                                    <h:outputText value="#{o.parkol_kezd}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name = "header">ParkVég </f:facet>
+                                    <h:outputText value="#{o.parkol_veg}"/>
+                                </h:column>                                        
+
+                            </h:dataTable>
+                        </p:layoutUnit>
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+
+        <p:commandButton value="Parkolóhoz adás" type="button" onclick="PF('parkDialog').show();"/>
+        <p:commandButton value="Parkolás Idő Megadása" type="button" onclick="PF('parkTimeDialog').show();"/>
+
+        <h:form>    
+            <p:dialog header="Parkoló" widgetVar="parkDialog" minHeight="40">
+                <h:outputText value="Kérem adja meg hova és melyik autót szeretné elhelyezni" /><br></br>
+                <br></br>
+
+                Rendszám: <br></br> <h:inputText id="rendsz" value="#{Auto2bean.rendszam}" /> <br></br>
+                Parkolók: <br></br>
+
+                <p:selectOneMenu id="country" value="#{Auto2bean.parkolo}" style="width:150px">                                            
+                    <f:selectItem itemLabel="Válasszon" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{Auto2bean.parkoloList}" />
+                </p:selectOneMenu>      
+
+                <p:separator />
+
+
+                <p:commandButton update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkoloTo(Auto2bean.rendszam, Auto2bean.parkolo)}" onclick="PF('dlg2').hide();"/>
+            </p:dialog>
+        </h:form>
+        <h:form>
+            <p:dialog header="Hiba" widgetVar="requestRendsz" >
+                <h:outputText value="A rendszám és parkoló paraméter megadása kötelező"/><br></br>
+                <h:commandButton value="Ok" onclick="PF('requestRendsz').hide();PF('parkDialog').show();"/>
+            </p:dialog>
+        </h:form>
+        <br></br>
+
+
+
+        <br></br>
+        <h:form>
+            <p:dialog header="Parkoló idő" widgetVar="parkTimeDialog">
+                <h:outputText value="Kérem adja meg mettől meddig kíván parkolni"/><br></br>
+                <br></br>
+
+                Rendszám :                                  
+                <p:selectOneMenu id="country" value="#{Auto2bean.rendszam}" style="width:150px">                                            
+                    <f:selectItem itemLabel="Válasszon" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{Auto2bean.rendszamList}" />
+                </p:selectOneMenu>
+                <p:separator />
+
+                Kezdete: <h:inputText value="#{Auto2bean.parkol_kezd}" /> <br></br>
+                Vége: <h:inputText value="#{Auto2bean.parkol_veg}" /> <br></br>
+
+                <p:commandButton update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkolasTime(Auto2bean.rendszam, Auto2bean.parkol_kezd, Auto2bean.parkol_veg)}" onclick="PF('parkTimeDialog').hide()"/>
+                    
+                    
+            </p:dialog>
+        </h:form>
+        <br></br>
+
+        <p:commandButton value="Vissza" action="index"/>
+    </h:body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Cars</title>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h:form id="form">
+            <p:dataTable id="dataTable" var="car" value="#{Auto2bean.autoList}" styleClass="table table-striped text-info">
+                <p:column headerText="Rendszám">
+                    <h:outputText value="#{car.rendszam}" />
+                </p:column>
+
+                <p:column headerText="Márka">
+                    <h:outputText value="#{car.marka}" />
+                </p:column>
+
+                <p:column headerText="Típus">
+                    <h:outputText value="#{car.tipus}" />
+                </p:column>
+
+                <p:column headerText="Szín">
+                    <h:outputText value="#{car.szin}" />
+                </p:column>
+
+                <p:column headerText="Parkoló">
+
+                    <h:outputText value="#{car.parkolo}"/>
+                </p:column>
+
+                <p:column headerText="ParkKezd">
+                    <h:outputText value="#{car.parkol_kezd}"/>
+                </p:column>
+
+                <p:column headerText="ParkVég">
+                    <h:outputText value="#{car.parkol_veg}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+      
+            <div class="p-grid p-justify-even">
+                <div class="p-col-1">
+                    <p:commandButton class="btn btn-primary" value="Auto hozzáadás" type="button" onclick="PF('autoPlus').show();" />
+                </div>
+                <div class="p-col-2">
+                    <p:commandButton class="btn btn-primary" value="Auto törlés" type="button" onclick="PF('autoMinus').show();" />
+                </div>
+                <div class="p-col-3">
+                    <p:commandButton class="btn btn-primary" value="Parkoló" action="parkoloFelulet"/>
+                </div>
+            </div>
+      
+
+        <h:form>
+            <p:dialog header="Auto +" widgetVar="autoPlus" minHeight="40">
+                <h:outputText value="Kérem adja meg az autó adatait" /><br></br>
+                <p:separator />
+
+                Rendszám: <br></br> <h:inputText value="#{Auto2bean.rendszam}" /> <br></br>
+                Márka: <br></br>    <h:inputText value="#{Auto2bean.marka}" />    <br></br>
+                Típus: <br></br>    <h:inputText value="#{Auto2bean.tipus}" />    <br></br>
+                Szín: <br></br>     <h:inputText value="#{Auto2bean.szin}" />     <br></br>
+
+                <br></br>
+
+                <p:commandButton update=":form:dataTable :rendszform" class="btn btn-primary" value="Mentés" action="#{Auto2bean.addAction}" onclick="PF('autoPlus').hide();"/>
+
+            </p:dialog>
+        </h:form>
+
+        <h:form id="rendszform">    
+            <p:dialog header="Auto -" widgetVar="autoMinus" minHeight="40">
+                <h:outputText value="Kérem adja meg a törelndő autó adatait" /><br></br>
+                <br></br>
+
+                Rendszám: <br></br> 
+                <p:selectOneMenu value="#{Auto2bean.rendszam}" style="width:150px">                                            
+                    <f:selectItem itemLabel="Válasszon" itemValue="" noSelectionOption="true" />
+                    <f:selectItems id="rendsz" value="#{Auto2bean.rendszamList}" />
+                </p:selectOneMenu>
+                <p:separator />
+                <p:commandButton update=":form:dataTable" class="btn btn-primary" value="Törlés" action="#{Auto2bean.deleteAction(Auto2bean.rendszam)}" onclick="PF('autoMinus').hide();"/>
+            </p:dialog>
+        </h:form>
+
+        <p:dialog header="Hiba" widgetVar="megtelt1" >
+            <h:outputText id="asd" value="A parkolóban már szerepel ezen rendszámú autó, kérem válasszon másikat"/><br></br>
+            <p:commandButton class="btn btn-primary btn-sm" value="Ok" onclick="PF('megtel1').hide();"/>
+        </p:dialog>
+
+        <p:dialog header="Hiba" widgetVar="requestRendsz" >
+            <h:outputText value="A rendszám paraméter megadása kötelező"/><br></br>
+            <p:commandButton class="btn btn-primary btn-sm" value="Ok" onclick="PF('requestRendsz').hide();PF('dlg2').show();"/>
+        </p:dialog>
+
+        <p:dialog header="Hiba" widgetVar="uresAutoAdd" >
+            <h:outputText value="Minden paraméter megadása kötelező"/><br></br>
+            <p:commandButton class="btn btn-primary btn-sm" value="Ok" onclick="PF('uresAutoAdd').hide();PF('dlg1').show();"/>
+        </p:dialog>
+
+        <div class="card text-center">
+            <div class="card-body">
+                <p:commandButton class="btn btn-primary btn-lg btn-block" value="Vissza" action="index"/>
+            </div>
+        </div>
+    </h:body>
+
+</html>

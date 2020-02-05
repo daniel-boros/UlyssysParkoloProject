@@ -366,9 +366,11 @@ public class Auto2 implements Serializable {
             return parkolo;
         }
         
-        public void tesztEcske(String bemeno) {
-            if (bemeno == null) System.out.println("null");
-            System.out.println("-->> " + bemeno);
+        public void tesztEcske() {
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('megtelt1').show();");
+            /*if (bemeno == null) System.out.println("null");*/
+            System.out.println("-->> ");
         }
 
         public void setParkolo(String parkolo) {
