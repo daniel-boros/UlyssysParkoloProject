@@ -16,10 +16,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.primefaces.context.PrimeRequestContext;
 import java.lang.Object;
+import javax.ejb.EJB;
 import org.primefaces.PrimeFaces;
         
 import parkoloPackageDTO.Auto;
 import parkoloPackageDTO.Auto;
+import MBeans.DataBase;
 
 /**
  *
@@ -28,8 +30,10 @@ import parkoloPackageDTO.Auto;
 @ManagedBean(name="Auto2bean")
 @RequestScoped
 public class Auto2 implements Serializable {
-    
-        private static final long serialVersionUID = 1L;
+
+    @EJB
+    private DataBase database;
+
     
         public String rendszam;
 	public String marka;
@@ -40,8 +44,8 @@ public class Auto2 implements Serializable {
         public Date parkVeg;
         public ArrayList<String> parkoloKocsikList = new ArrayList<String>();
         public ArrayList<String> rendszamList = new ArrayList<String>();
-                                
-        private static final ArrayList<Auto> autoList = 
+        
+        /*private static final ArrayList<Auto> autoList = 
                     new ArrayList<Auto>(Arrays.asList(                    
                    
                         new Auto("abc-123","opel", "corsa", "feher", "Budapest"),  
@@ -50,11 +54,11 @@ public class Auto2 implements Serializable {
                         new Auto("xyz-987","mercedes", "gt", "zold", "Debrecen")
                         
                             
-	));
+	));*/
      
         public ArrayList<Auto> getAutoList() {
- 
-		return autoList;
+                
+		return database.getAutoListB();
  
 	}
         
@@ -71,15 +75,15 @@ public class Auto2 implements Serializable {
                     return;
                 }
                 
-                for (int i = 0; i < autoList.size(); i++) {
-                    if (autoList.get(i).rendszam.compareTo(uj.rendszam) == 0) {
+                for (int i = 0; i < database.getAutoListB().size(); i++) {
+                    if (database.getAutoListB().get(i).rendszam.compareTo(uj.rendszam) == 0) {
                         flag++;
                         System.out.println("a rendszám már szerepel az adatbázisban " + flag);
                     }
                 }
 		
                 if (flag == 0){
-                    autoList.add(uj);
+                    database.getAutoListB().add(uj);
                 }
 	}
         
@@ -96,10 +100,10 @@ public class Auto2 implements Serializable {
                     //context.execute("PF('requestRendsz').show();");
                 }
             
-		for (int i = 0; i < autoList.size(); i++) {
-                    if (autoList.get(i).rendszam.compareTo(rendsza) == 0) {
+		for (int i = 0; i < database.getAutoListB().size(); i++) {
+                    if (database.getAutoListB().get(i).rendszam.compareTo(rendsza) == 0) {
                         System.out.println(rendsza + " törölve");
-                        autoList.remove(i);
+                        database.getAutoListB().remove(i);
                     }
             }
 	}
@@ -123,11 +127,11 @@ public class Auto2 implements Serializable {
             /*if (autoList.get(autoList.indexOf()).parkolo == null) {
                 System.out.println(autoList.get(autoList.indexOf(bemeno)).parkolo + "<-----üres--------");*/
             } else {
-                for (int i = 0; i < autoList.size(); i++) { 
-                    if (autoList.get(i).parkolo != null){
+                for (int i = 0; i < database.getAutoListB().size(); i++) { 
+                    if (database.getAutoListB().get(i).parkolo != null){
                         System.out.println("túljutva");
-                        if (autoList.get(i).parkolo.compareTo(b_parkolo) == 0) {
-                            if (autoList.get(i).rendszam.compareTo(b_rendszam) == 0) {
+                        if (database.getAutoListB().get(i).parkolo.compareTo(b_parkolo) == 0) {
+                            if (database.getAutoListB().get(i).rendszam.compareTo(b_rendszam) == 0) {
                                 flag++;
                                 System.out.println("a rendszám már szerepel a parkolóban " + flag);
                             }
@@ -139,15 +143,15 @@ public class Auto2 implements Serializable {
             if (flag == 0) {
                 int index = 0;
                 //autoList.get(autoList.indexOf(bemeno)).setParkolo("Debrecen");
-                for (int i = 0; i < autoList.size(); i++) {
+                for (int i = 0; i < database.getAutoListB().size(); i++) {
                     System.out.println("flag0");
-                    if (autoList.get(i).rendszam.compareTo(b_rendszam) == 0) {
+                    if (database.getAutoListB().get(i).rendszam.compareTo(b_rendszam) == 0) {
                         System.out.println("index=i");
                         index = i;
                     }
                 }
                 System.out.println(b_parkolo + " parkolóba behelyezve: " + b_rendszam);
-                autoList.get(index).setParkolo(b_parkolo);
+                database.getAutoListB().get(index).setParkolo(b_parkolo);
             } else {
                 System.out.println("dialog meghívva");
                 //RequestContext context = RequestContext.getCurrentInstance();
@@ -158,12 +162,12 @@ public class Auto2 implements Serializable {
         public void setParkoloToDebrecen(Auto bemeno) {
             int flag = 0;
             
-            if (autoList.get(autoList.indexOf(bemeno)).parkolo == null) {
-                System.out.println(autoList.get(autoList.indexOf(bemeno)).parkolo + "<-----üres--------");
+            if (database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).parkolo == null) {
+                System.out.println(database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).parkolo + "<-----üres--------");
             } else {
-                for (int i = 0; i < autoList.size(); i++) {                               
-                        if (autoList.get(i).parkolo.compareTo("Debrecen") == 0) {
-                            if (autoList.get(i).rendszam.compareTo(bemeno.rendszam) == 0) {
+                for (int i = 0; i < database.getAutoListB().size(); i++) {                               
+                        if (database.getAutoListB().get(i).parkolo.compareTo("Debrecen") == 0) {
+                            if (database.getAutoListB().get(i).rendszam.compareTo(bemeno.rendszam) == 0) {
                                 flag++;
                                 System.out.println("a rendszám már szerepel a parkolóban " + flag);
                             }
@@ -172,7 +176,7 @@ public class Auto2 implements Serializable {
             }
 
             if (flag == 0) {
-                autoList.get(autoList.indexOf(bemeno)).setParkolo("Debrecen");
+                database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).setParkolo("Debrecen");
             } else {
                 System.out.println("dialog meghívva");
                 //RequestContext context = RequestContext.getCurrentInstance();
@@ -182,12 +186,12 @@ public class Auto2 implements Serializable {
         public void setParkoloToBudapest(Auto bemeno) {
            int flag = 0;
             
-            if (autoList.get(autoList.indexOf(bemeno)).parkolo == null) {
-                System.out.println(autoList.get(autoList.indexOf(bemeno)).parkolo + "<-----üres--------");
+            if (database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).parkolo == null) {
+                System.out.println(database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).parkolo + "<-----üres--------");
             } else {
-                for (int i = 0; i < autoList.size(); i++) {                               
-                        if (autoList.get(i).parkolo.compareTo("Budapest") == 0) {
-                            if (autoList.get(i).rendszam.compareTo(bemeno.rendszam) == 0) {
+                for (int i = 0; i < database.getAutoListB().size(); i++) {                               
+                        if (database.getAutoListB().get(i).parkolo.compareTo("Budapest") == 0) {
+                            if (database.getAutoListB().get(i).rendszam.compareTo(bemeno.rendszam) == 0) {
                                 flag++;
                                 System.out.println("a rendszám már szerepel a parkolóban " + flag);
                             }
@@ -196,7 +200,7 @@ public class Auto2 implements Serializable {
             }
 
             if (flag == 0) {
-                autoList.get(autoList.indexOf(bemeno)).setParkolo("Budapest");
+                database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).setParkolo("Budapest");
             } else {
                 System.out.println("dialog meghívva");
                 //RequestContext context = RequestContext.getCurrentInstance();
@@ -206,12 +210,12 @@ public class Auto2 implements Serializable {
         public void setParkoloToGyor(Auto bemeno) {
             int flag = 0;
             
-            if (autoList.get(autoList.indexOf(bemeno)).parkolo == null) {
-                System.out.println(autoList.get(autoList.indexOf(bemeno)).parkolo + "<-----üres--------");
+            if (database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).parkolo == null) {
+                System.out.println(database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).parkolo + "<-----üres--------");
             } else {
-                for (int i = 0; i < autoList.size(); i++) {                               
-                        if (autoList.get(i).parkolo.compareTo("Győr") == 0) {
-                            if (autoList.get(i).rendszam.compareTo(bemeno.rendszam) == 0) {
+                for (int i = 0; i < database.getAutoListB().size(); i++) {                               
+                        if (database.getAutoListB().get(i).parkolo.compareTo("Győr") == 0) {
+                            if (database.getAutoListB().get(i).rendszam.compareTo(bemeno.rendszam) == 0) {
                                 flag++;
                                 System.out.println("a rendszám már szerepel a parkolóban " + flag);
                             }
@@ -220,7 +224,7 @@ public class Auto2 implements Serializable {
             }
 
             if (flag == 0) {
-                autoList.get(autoList.indexOf(bemeno)).setParkolo("Győr");
+                database.getAutoListB().get(database.getAutoListB().indexOf(bemeno)).setParkolo("Győr");
             } else {
                 System.out.println("dialog meghívva");
                 //RequestContext context = RequestContext.getCurrentInstance();
@@ -232,10 +236,10 @@ public class Auto2 implements Serializable {
  
                 ArrayList<Auto> tmp = new ArrayList<Auto>();
                                         
-                for (int i = 0; i < autoList.size(); i++) {
-                    if (autoList.get(i).parkolo != null){
-                        if (autoList.get(i).parkolo.compareTo("Debrecen") == 0 || 
-                                autoList.get(i).parkolo.compareTo("debrecen") == 0) tmp.add(autoList.get(i));
+                for (int i = 0; i < database.getAutoListB().size(); i++) {
+                    if (database.getAutoListB().get(i).parkolo != null){
+                        if (database.getAutoListB().get(i).parkolo.compareTo("Debrecen") == 0 || 
+                                database.getAutoListB().get(i).parkolo.compareTo("debrecen") == 0) tmp.add(database.getAutoListB().get(i));
                     }
                 }
                 
@@ -246,10 +250,10 @@ public class Auto2 implements Serializable {
  
                 ArrayList<Auto> tmp = new ArrayList<Auto>();
             
-                for (int i = 0; i < autoList.size(); i++) {
-                    if (autoList.get(i).parkolo != null){
-                        if (autoList.get(i).parkolo.compareTo("Budapest") == 0 ||
-                                autoList.get(i).parkolo.compareTo("budapest") == 0) tmp.add(autoList.get(i));
+                for (int i = 0; i < database.getAutoListB().size(); i++) {
+                    if (database.getAutoListB().get(i).parkolo != null){
+                        if (database.getAutoListB().get(i).parkolo.compareTo("Budapest") == 0 ||
+                                database.getAutoListB().get(i).parkolo.compareTo("budapest") == 0) tmp.add(database.getAutoListB().get(i));
                     }
                 }
                 
@@ -260,10 +264,10 @@ public class Auto2 implements Serializable {
  
                 ArrayList<Auto> tmp = new ArrayList<Auto>();
             
-                for (int i = 0; i < autoList.size(); i++) {
-                    if (autoList.get(i).parkolo != null){
-                        if (autoList.get(i).parkolo.compareTo("Győr") == 0 ||
-                                autoList.get(i).parkolo.compareTo("győr") == 0) tmp.add(autoList.get(i));
+                for (int i = 0; i < database.getAutoListB().size(); i++) {
+                    if (database.getAutoListB().get(i).parkolo != null){
+                        if (database.getAutoListB().get(i).parkolo.compareTo("Győr") == 0 ||
+                                database.getAutoListB().get(i).parkolo.compareTo("győr") == 0) tmp.add(database.getAutoListB().get(i));
                     }
                 }
                 
@@ -290,11 +294,11 @@ public class Auto2 implements Serializable {
                 return;
             }
             
-            for (int i = 0; i < autoList.size(); i++) {
-                if (autoList.get(i).rendszam != null){
-                    if (autoList.get(i).rendszam.compareTo(rendsz1) == 0) {
-                            autoList.get(i).setParkKezd(kezd1);
-                            autoList.get(i).setParkVeg(veg1);
+            for (int i = 0; i < database.getAutoListB().size(); i++) {
+                if (database.getAutoListB().get(i).rendszam != null){
+                    if (database.getAutoListB().get(i).rendszam.compareTo(rendsz1) == 0) {
+                            database.getAutoListB().get(i).setParkKezd(kezd1);
+                            database.getAutoListB().get(i).setParkVeg(veg1);
                             System.out.println("beállítás sikeres");
                     }
                 }
@@ -304,8 +308,8 @@ public class Auto2 implements Serializable {
 
         public ArrayList<String> getRendszamList() {
             rendszamList.clear();
-            for (int i = 0; i < autoList.size(); i++) {
-                rendszamList.add(autoList.get(i).rendszam);
+            for (int i = 0; i < database.getAutoListB().size(); i++) {
+                rendszamList.add(database.getAutoListB().get(i).rendszam);
             }
             return rendszamList;
         }
