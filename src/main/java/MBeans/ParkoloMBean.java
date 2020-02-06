@@ -3,20 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package auto_beans;
+package MBeans;
 
+import parkoloPackageDTO.Auto;
+import parkoloPackageDTO.Parkolo;
+
+import parkoloPackageDTO.Parkolo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author User
  */
-@Named(value = "parkolo2")
-@Dependent
-public class Parkolo2 {
+@ManagedBean(name = "parkoloMBean")
+@RequestScoped
+public class ParkoloMBean {
 
     public String nev;
     public int ferohely;

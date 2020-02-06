@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package auto_beans;
+package MBeans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,6 +18,8 @@ import org.primefaces.context.PrimeRequestContext;
 import java.lang.Object;
 import org.primefaces.PrimeFaces;
         
+import parkoloPackageDTO.Auto;
+import parkoloPackageDTO.Auto;
 
 /**
  *
