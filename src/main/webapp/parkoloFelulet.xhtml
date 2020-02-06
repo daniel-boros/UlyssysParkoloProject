@@ -11,11 +11,39 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+    <style>
+        .iconInfo {
+            background-color: #30383c;
+            position: fixed;
+            bottom: 0;
+            size: 20;
+            right: 0;
+            width: 260px;
+            color: #ffffff;
+            padding: 0 10px 5px;
+        }
+    </style>
+
     <h:head>
         <title>Carssssss</title>
 
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        </link>
+        <script src="https://kit.fontawesome.com/ae00d4e42e.js" crossorigin="anonymous"></script>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
     </h:head>    
     <h:body>
+        <div class="card text-center">
+            <div class="card-header">
+                Ulyssys Kft.
+            </div>
+            <div class="card-body">
+                <h1 class="card-title font-weight-bold">Parkoló</h1>
+                <p class="card-text">Kérem válasszon az alábbi opciók közül</p>
+
+            </div>
+        </div>
         <h:form id="form1">
             <p:tabView id="tab1">
                 <p:tab title="Debrecen">
@@ -150,9 +178,13 @@ and open the template in the editor.
             </p:tabView>
         </h:form>
 
-        <p:commandButton value="Parkolóhoz adás" type="button" onclick="PF('parkDialog').show();"/>
-        <p:commandButton value="Parkolás Idő Megadása" type="button" onclick="PF('parkTimeDialog').show();"/>
+        <p:commandButton style="width:250px" icon="pi pi-plus-circle" class="btn" value="Parkolóhoz adás" onclick="PF('parkDialog').show();"/>
+        <p:commandButton style="width:250px" icon="pi pi-clock" class="btn" value="Parkolás Idő Megadása" onclick="PF('parkTimeDialog').show();"/>
+        <br></br>
 
+            <div class="card-body">
+                <p:commandButton icon="pi pi-arrow-left" class="btn btn-lg" value="Vissza" action="index"/>
+            </div>
         <h:form>    
             <p:dialog header="Parkoló" widgetVar="parkDialog" minHeight="40" width="500">
                 <h:outputText value="Kérem adja meg hova és melyik autót szeretné elhelyezni" /><br></br>
@@ -168,7 +200,7 @@ and open the template in the editor.
                 Parkolók: 
 
                 <p:selectOneRadio id="console" value="#{Auto2bean.parkolo}" >
-                        <f:selectItem itemLabel="Debrecen" itemValue="Debrecen" />
+                    <f:selectItem itemLabel="Debrecen" itemValue="Debrecen" />
                     <f:selectItem itemLabel="Budapest" itemValue="Budapest" />
                     <f:selectItem itemLabel="Győőr" itemValue="Győr" />
                 </p:selectOneRadio>    
@@ -209,9 +241,8 @@ and open the template in the editor.
 
 
             </p:dialog>
+            
         </h:form>
-        <br></br>
-
-        <p:commandButton value="Vissza" action="index"/>
+        
     </h:body>
 </html>
