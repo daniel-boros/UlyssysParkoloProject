@@ -12,6 +12,13 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
 
     <style>
+        div {
+            border-style: solid;
+            border-color: #24292e;
+        }
+        body{
+            border-color:  #24292e;
+        }
         .iconInfo {
             background-color: #30383c;
             position: fixed;
@@ -21,6 +28,16 @@ and open the template in the editor.
             width: 260px;
             color: #ffffff;
             padding: 0 10px 5px;
+        }
+        table{
+            border-color: #24292e;
+        }
+        #fejlec{
+            text-align: center;
+            color: #ffffff;
+        }
+        #tabbb{
+            background-color: 2f363d;
         }
     </style>
 
@@ -34,20 +51,20 @@ and open the template in the editor.
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
     </h:head>    
     <h:body>
-        <div class="card text-center">
-            <div class="card-header">
+        <div class="card text-center" style="border-color: #24292e">
+            <div id="fejlec" class="card-header" style="background: #24292e; border-color: #24292e; color: #ffffff">
                 Ulyssys Kft.
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background: #2f363d; color: #ffffff">
                 <h1 class="card-title font-weight-bold">Parkoló</h1>
                 <p class="card-text">Kérem válasszon az alábbi opciók közül</p>
 
             </div>
         </div>
         <h:form id="form1">
-            <p:tabView id="tab1">
+            <p:tabView id="tab1" style="background-color: #2f363d">
                 <p:tab title="Debrecen">
-                    <h:panelGrid id="grid">
+                    <h:panelGrid id="grid" style="background-color: #2f363d">
                         <p:layoutUnit position="center">
                             <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfDebrecen}" var="o">
 
@@ -90,7 +107,7 @@ and open the template in the editor.
                     </h:panelGrid>
                 </p:tab>
                 <p:tab title="Budapest">
-                    <h:panelGrid>
+                    <h:panelGrid style="background-color: #2f363d">
                         <p:layoutUnit position="center">
                             <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfBudapest}" var="o">
 
@@ -132,8 +149,8 @@ and open the template in the editor.
                         </p:layoutUnit>
                     </h:panelGrid>
                 </p:tab>
-                <p:tab title="Győr">
-                    <h:panelGrid>
+                <p:tab id="tabbb" title="Győr">
+                    <h:panelGrid style="background-color: #2f363d">
                         <p:layoutUnit position="center">
                             <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfGyor}" var="o">
 
@@ -176,15 +193,19 @@ and open the template in the editor.
                     </h:panelGrid>
                 </p:tab>
             </p:tabView>
+            <p:contextMenu>
+                <p:menuitem value="Főoldal" action="index" icon="pi pi-save"/>
+                <p:menuitem value="Autó Felület" action="autoFelulet" icon="pi pi-refresh"/>
+            </p:contextMenu>
         </h:form>
 
-        <p:commandButton style="width:250px" icon="pi pi-plus-circle" class="btn" value="Parkolóhoz adás" onclick="PF('parkDialog').show();"/>
-        <p:commandButton style="width:250px" icon="pi pi-clock" class="btn" value="Parkolás Idő Megadása" onclick="PF('parkTimeDialog').show();"/>
+        <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-plus-circle" class="btn" value="Parkolóhoz adás" onclick="PF('parkDialog').show();"/>
+        <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-clock" class="btn" value="Parkolás Idő Megadása" onclick="PF('parkTimeDialog').show();"/>
         <br></br>
 
-            <div class="card-body">
-                <p:commandButton icon="pi pi-arrow-left" class="btn btn-lg" value="Vissza" action="index"/>
-            </div>
+        <div class="card-body">
+            <p:commandButton style="font-style: normal; font-size: x-small; color: #ffffff ; background: #7400b3" icon="pi pi-arrow-left" class="btn btn-lg" value="Vissza" action="index"/>
+        </div>
         <h:form>    
             <p:dialog header="Parkoló" widgetVar="parkDialog" minHeight="40" width="500">
                 <h:outputText value="Kérem adja meg hova és melyik autót szeretné elhelyezni" /><br></br>
@@ -208,13 +229,13 @@ and open the template in the editor.
                 <p:separator />
 
 
-                <p:commandButton update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkoloTo(Auto2bean.rendszam, Auto2bean.parkolo)}" onclick="PF('dlg2').hide();"/>
+                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkoloTo(Auto2bean.rendszam, Auto2bean.parkolo)}" onclick="PF('dlg2').hide();"/>
             </p:dialog>
         </h:form>
         <h:form>
             <p:dialog header="Hiba" widgetVar="requestRendsz" >
                 <h:outputText value="A rendszám és parkoló paraméter megadása kötelező"/><br></br>
-                <h:commandButton value="Ok" onclick="PF('requestRendsz').hide();PF('parkDialog').show();"/>
+                <h:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Ok" onclick="PF('requestRendsz').hide();PF('parkDialog').show();"/>
             </p:dialog>
         </h:form>
         <br></br>
@@ -237,12 +258,12 @@ and open the template in the editor.
                 Kezdés: <p:datePicker value="#{Auto2bean.parkKezd}" timeOnly="true" pattern="HH:mm"/> <br></br>
                 Végzés: <p:datePicker value="#{Auto2bean.parkVeg}" timeOnly="true" pattern="HH:mm"/> <br></br>
                 <p:separator />
-                <p:commandButton update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkolasTime(Auto2bean.rendszam, Auto2bean.parkKezd, Auto2bean.parkVeg)}" onclick="PF('parkTimeDialog').hide()"/>
+                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkolasTime(Auto2bean.rendszam, Auto2bean.parkKezd, Auto2bean.parkVeg)}" onclick="PF('parkTimeDialog').hide()"/>
 
 
             </p:dialog>
-            
+
         </h:form>
-        
+
     </h:body>
 </html>

@@ -6,6 +6,29 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+        <style>
+            div {
+                border-style: solid;
+                border-color: #24292e;
+            }
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;   
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+            body{
+                border-color:  #24292e;
+            }
+            #fejlec{
+                text-align: center;
+                color: #ffffff;
+            }
+
+        </style>
+
         <title>Ulyssys Feladat</title>
 
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -14,49 +37,48 @@
         <script src="https://kit.fontawesome.com/ae00d4e42e.js" crossorigin="anonymous"></script>
 
     </h:head>
-    <h:body>
+    <h:body style="background: #24292e">
         <h:form>     
-            <div class="card text-center">
-                <div class="card-header">
+            <div class="card text-center" style="background: #24292e">
+                <div id="fejlec" class="card-header" style="background: #24292e">
                     Ulyssys Kft.
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="background: #2f363d; color: #ffffff">
                     <h1 class="card-title font-weight-bold">Menü</h1>
                     <p class="card-text">Kérem válasszon az alábbi opciók közül</p>
 
                 </div>
-                <div class="card-footer text-muted">
+                <div class="card-footer text-muted" style="background: #24292e">
                     Itt tarthatja nyílván regisztrált járműveit valamint parkolóit.
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" >
                 <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Autó nyilvántartó felület</h5>
+                    <div class="card" style="background: #24292e">
+                        <div class="card-body" style="background: #2f363d; color: #ffffff">
+                            <h5 class="card-title font-weight-bold">Autó nyilvántartó felület</h5>
                             <p class="card-text">Lista a jelelegi járművekről, ahol hozzáadhat és törölhet is járműveket.</p>
 
-                            
-                            <p:commandButton value="Tovább" action="autoFelulet"/>
-                            
+
+                            <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Tovább" action="autoFelulet"/>
+
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Parkoló felület</h5>
+                    <div class="card" style="background: #24292e">
+                        <div class="card-body" style="background: #2f363d; color: #ffffff">
+                            <h5 class="card-title font-weight-bold">Parkoló felület</h5>
                             <p class="card-text">Megtekintheti az elérhető parkolókat, hozzáadhat új parkolót és parkolási intervallumot </p>
 
 
-                            <p:commandButton value="Tovább" action="parkoloFelulet"/>
+                            <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Tovább" action="parkoloFelulet"/>
 
                         </div>
                     </div>
                 </div>
             </div>
-
         </h:form>
 
     </h:body>
