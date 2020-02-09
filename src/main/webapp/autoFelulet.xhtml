@@ -20,7 +20,7 @@
             }
             #container{
                 text-align: center;
-
+                object-position: center;
             }
             #fejlec{
                 text-align: center;
@@ -52,7 +52,7 @@
 
             </div>
         </div>
-        
+
         <h:form id="form">
             <p:dataTable styleClass="table table-striped " style="background-color: #2f363d" id="dataTable" var="car" value="#{Auto2bean.autoList}">
                 <p:column headerText="Rendszám">
@@ -99,8 +99,18 @@
             <div id="container" class="container">
                 <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-plus" class="btn" value="Auto hozzáadás" onclick="PF('autoPlus').show();" />
                 <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-minus" class="btn" value="Auto törlés" type="button" onclick="PF('autoMinus').show();" />
-                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" class="btn" value="Parkoló" action="parkoloFelulet"/>
+                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-align-justify" class="btn" value="Parkoló" action="parkoloFelulet"/>
+                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-chart-bar" class="btn" value="Diagram" action="#{Auto2bean.createPieModel()}" type="button" onclick="PF('autoDiagram').show();" update=":diagram1:diagg:pan:chart"/>
             </div>
+        </h:form>
+
+        <h:form id="diagram1">
+            <p:dialog id="diagg"  header="Autó Diagram" widgetVar="autoDiagram" minHeight="40">
+                <p:panel id="pan" style="width: 800px">
+                    <p:ajax event="close" update=":diagram1"/>
+                    <p:pieChart id="chart" model="#{Auto2bean.pieModel}"/>
+                </p:panel>
+            </p:dialog>
         </h:form>
 
         <h:form>
@@ -115,7 +125,7 @@
 
                 <br></br>
 
-                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form:dataTable :rendszform" class="btn btn-primary" value="Mentés" action="#{Auto2bean.addAction}" onclick="PF('autoPlus').hide();"/>
+                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form:dataTable :rendszform :diagram1" class="btn btn-primary" value="Mentés" action="#{Auto2bean.addAction}" onclick="PF('autoPlus').hide();"/>
 
             </p:dialog>
         </h:form>

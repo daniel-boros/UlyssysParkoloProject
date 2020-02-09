@@ -11,6 +11,10 @@ import javax.ejb.Stateless;
 import parkoloPackageDTO.Auto;
 import parkoloPackageDTO.Parkolo;
 import MBeans.ParkoloMBean;
+import java.util.List;
+import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.pie.PieChartDataSet;
+import org.primefaces.model.charts.pie.PieChartModel;
 
 /**
  *
@@ -18,28 +22,24 @@ import MBeans.ParkoloMBean;
  */
 @Stateless
 public class DataBase {
-    
-    private ArrayList<Auto> autoListB = 
-                    new ArrayList<Auto>(Arrays.asList(                    
-                   
-                        new Auto("abc-123","opel", "corsa", "feher", "Budapest"),  
-                        new Auto("bcg-234","volvo", "c70", "piros", "Debrecen"),    
-                        new Auto("plk-789","bmw", "Isetta", "kek", "Győr"), 
-                        new Auto("xyz-987","mercedes", "Rotschwein", "zold", "Debrecen")
-                        
-                            
-	));
-    
-    private ArrayList<Parkolo> parkoloAutoListB = 
-                    new ArrayList<Parkolo>(Arrays.asList(
-                                 
-                            new Parkolo("Debrecen", 15, new ArrayList<Auto>(Arrays.asList(new Auto("abc-123","opel", "corsa", "feher")))),  
-                            new Parkolo("Budapest", 25, new ArrayList<Auto>(Arrays.asList(new Auto("bcg-234","volvo", "850R", "piros")))),    
-                            new Parkolo("Győr", 10, new ArrayList<Auto>(Arrays.asList(new Auto("plk-789","bayerisch motoren werke", "fk-1", "kek")))) 
-                            
-                                                                       
-                    ));
 
+    
+    private ArrayList<Auto> autoListB
+            = new ArrayList<Auto>(Arrays.asList(
+                    new Auto("abc-123", "Opel", "corsa", "feher", "Budapest"),
+                    new Auto("bcg-234", "Volvo", "c70", "piros", "Debrecen"),
+                    new Auto("plk-789", "Bmw", "Isetta", "kek", "Győr"),
+                    new Auto("xyz-987", "Mercedes", "Rotschwein", "zold", "Debrecen")
+            ));
+
+    private ArrayList<Parkolo> parkoloAutoListB
+            = new ArrayList<Parkolo>(Arrays.asList(
+                    new Parkolo("Debrecen", 15, new ArrayList<Auto>(Arrays.asList(new Auto("abc-123", "opel", "corsa", "feher")))),
+                    new Parkolo("Budapest", 25, new ArrayList<Auto>(Arrays.asList(new Auto("bcg-234", "volvo", "850R", "piros")))),
+                    new Parkolo("Győr", 10, new ArrayList<Auto>(Arrays.asList(new Auto("plk-789", "bayerisch motoren werke", "fk-1", "kek"))))
+            ));
+
+    
     public ArrayList<Auto> getAutoListB() {
         return autoListB;
     }
@@ -56,5 +56,4 @@ public class DataBase {
         this.parkoloAutoListB = parkoloAutoListB;
     }
 
-    
 }
