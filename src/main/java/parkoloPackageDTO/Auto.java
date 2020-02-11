@@ -1,18 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package parkoloPackageDTO;
 
 import java.util.Date;
 
 /**
  *
- * @author User
+ * Auto osztály, amelyben az autók attribútumait, konstruktorát valamit getter és setter metódusait találjuk meg. 
+ * @author Daniel Boros
  */
 public class Auto {
-
+            
+            
             public String rendszam;
             public String marka;
             public String tipus;

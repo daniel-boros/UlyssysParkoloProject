@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MBeans;
 
 import java.util.ArrayList;
@@ -17,13 +12,15 @@ import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
 
 /**
- *
+ * Stateless EJB, amelye osztály tartalmazza "adatbázis szerűen" az előre felvett adatokat.
  * @author Daniel
  */
 @Stateless
 public class DataBase {
 
-    
+    /**
+     * parkoló autók listája
+     */
     private ArrayList<Auto> autoListB
             = new ArrayList<Auto>(Arrays.asList(
                     new Auto("abc-123", "Opel", "corsa", "feher", "Budapest"),
@@ -32,6 +29,9 @@ public class DataBase {
                     new Auto("xyz-987", "Mercedes", "Rotschwein", "zold", "Debrecen")
             ));
 
+    /**
+     * Parkolók listája
+     */
     private ArrayList<Parkolo> parkoloAutoListB
             = new ArrayList<Parkolo>(Arrays.asList(
                     new Parkolo("Debrecen", 15, new ArrayList<Auto>(Arrays.asList(new Auto("abc-123", "opel", "corsa", "feher")))),

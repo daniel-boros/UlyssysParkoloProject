@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MBeans;
 
 import java.io.Serializable;
@@ -28,8 +23,8 @@ import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
 
 /**
- *
- * @author User
+ * Az Auto2 osztály, amely tartalmazza az autókhoz tartozó Üzleti Logikát
+ * @author Daniel Boros
  */
 @ManagedBean(name = "Auto2bean")
 @RequestScoped
@@ -59,17 +54,32 @@ public class Auto2 implements Serializable {
                         
                             
 	));*/
+    
+    /**
+     * getAutoList, egy előre létrehozott "adatbázisból" adja vissza az autók előre felvett listáját, 
+     * amit a DataBase osztályban tárolunk autListB néven.
+     * Ezt a @EJB annotáción keresztül érjünk el.
+     * @return Auto Listát ad vissza
+     */
     public ArrayList<Auto> getAutoList() {
 
         return database.getAutoListB();
 
     }
 
+    /**
+     * a createPieModel mindenképpen lefut és el lesz végezve
+     */
     @PostConstruct
     public void init() {
         createPieModel();
     }
      
+    /**
+     * eljárás amiben 4 autó márka számára létrehozzuk a PieChartModel-t, ebben tartjuk nyílván, 
+     * hogy melyik márkából számszerűsítve mennyi található.
+     * a cikkelyekhez különböző színek(bgColors) és címkék(labels) rendelhetők
+     */
     public void createPieModel() {
         pieModel = new PieChartModel();
         ChartData data = new ChartData();
@@ -94,10 +104,6 @@ public class Auto2 implements Serializable {
         values.add(bCount);
         values.add(oCount);
         
-        /*values.add(400);
-        values.add(300);
-        values.add(50);
-        values.add(100);*/
         dataSet.setData(values);
          
         List<String> bgColors = new ArrayList<>();
@@ -126,6 +132,11 @@ public class Auto2 implements Serializable {
         this.pieModel = pieModel;
     }
     
+    /**
+     * Hozzáad egy autót a meglevő listánkhoz.
+     * Ellenőrzi, hogy a kitöltendő mezők(Dialog) mindegyike ki van-e töltve, amennyiben nincs, hibaüzenetet dob.
+     * Ellenőrzi, hogy a rendszám szerepel-e már a listában, ha igen hiba üzenetet dob.
+     */
     public void addAction() {
 
         int flag = 0;
@@ -151,10 +162,10 @@ public class Auto2 implements Serializable {
         }
     }
 
-    /*public void deleteAction(Auto auto) {
-	    
-		autoList.remove(auto);
-	}*/
+    /**
+     * Töröl egy autót a meglevő listánkból
+     * @param rendsza rendszám paraméter
+     */
     public void deleteAction(String rendsza) {
 
         if (rendsza == null || rendsza.isEmpty()) {
@@ -170,11 +181,15 @@ public class Auto2 implements Serializable {
         }
     }
 
-    /*public String getDebreceniAutok() {
-            if (this.parkolo.compareTo("Debrecen") == 0) {
-                return 
-            }
-        }*/
+    /**
+     * Egy autó hozzáadása tetszőleges parkolóhoz.
+     * Parkoló beállítása egy autó számára tetszőleges városra/helyre. 
+     * Ellenőrzi, hogy a rendszám és parkoló paraméter meglett-e adva.
+     * Amennyiben igen, ellenőrzi hogy az autó szerepel-e már abban a parkolóban.
+     * Ha nem, hozzáadja, ha pedig igen, hiba üzenetet dob.
+     * @param b_rendszam rendszám paraméter
+     * @param b_parkolo parkoló paraméter
+     */
     public void setParkoloTo(String b_rendszam, String b_parkolo) {
         int flag = 0;
 
@@ -219,6 +234,7 @@ public class Auto2 implements Serializable {
         }
     }
 
+    /*
     public void setParkoloToDebrecen(Auto bemeno) {
         int flag = 0;
 
@@ -292,8 +308,12 @@ public class Auto2 implements Serializable {
             //RequestContext context = RequestContext.getCurrentInstance();
             //context.execute("PF('megtelt1').show();");
         }
-    }
+    }*/
 
+    /**
+     * Vissza adja a Debrecenhez parkolóhoz tartozó autókat 
+     * @return Debrecenben található autók listáját adja vissza
+     */
     public ArrayList<Auto> getParkoloOfDebrecen() {
 
         ArrayList<Auto> tmp = new ArrayList<Auto>();
@@ -311,6 +331,10 @@ public class Auto2 implements Serializable {
 
     }
 
+    /**
+     * Vissza adja a Budapesthez parkolóhoz tartozó autókat 
+     * @return Budapesten található autók listáját adja vissza
+     */
     public ArrayList<Auto> getParkoloOfBudapest() {
 
         ArrayList<Auto> tmp = new ArrayList<Auto>();
@@ -328,6 +352,10 @@ public class Auto2 implements Serializable {
 
     }
 
+    /**
+     * Vissza adja a Győrhöz parkolóhoz tartozó autókat 
+     * @return Győrben található autók listáját adja vissza
+     */
     public ArrayList<Auto> getParkoloOfGyor() {
 
         ArrayList<Auto> tmp = new ArrayList<Auto>();
@@ -354,6 +382,14 @@ public class Auto2 implements Serializable {
             System.out.println("kezd: " + parkolni_vegez1 + "|" + rendsz1);
             //setParkol_veg(parkolni_vegez);
         }*/
+    
+    /**
+     * Beállítja egy Autó számára a pakrolási idő kezdtetét és végét.
+     * Ellenőrzi, hogy a megadott paraméterek üresek-e.
+     * @param rendsz1 rendszám paraméter
+     * @param kezd1 parkolási idő kezdete paraméter
+     * @param veg1 parkolási idő vége paraméter
+     */
     public void setParkolasTime(String rendsz1, Date kezd1, Date veg1) {
         System.out.println("kezd: " + kezd1 + " vég: " + veg1 + " | " + rendsz1);
 
@@ -375,6 +411,12 @@ public class Auto2 implements Serializable {
 
     }
 
+    /**
+     * Visszadaja az autók rendszámaiknak egy listáját.
+     * autoFelulet.xhtml fájlban kerül felhasználásra egy legördülő listához.
+     * Először törli a listát, majd újra felveszi az értékeket, hogy mindig a friss/aktuális autók rendszámait mutassa.
+     * @return rendszámok listáját adja vissza
+     */
     public ArrayList<String> getRendszamList() {
         rendszamList.clear();
         for (int i = 0; i < database.getAutoListB().size(); i++) {
@@ -387,6 +429,10 @@ public class Auto2 implements Serializable {
         this.rendszamList = rendszamList;
     }
 
+    /**
+     * Visszadaja a parkolók egy listáját.
+     * @return Parkolók listáját adja vissza
+     */
     public ArrayList<String> getParkoloList() {
         parkoloKocsikList.clear();
         parkoloKocsikList.add("Debrecen");
@@ -419,6 +465,9 @@ public class Auto2 implements Serializable {
         return parkolo;
     }
 
+    /**
+     * Teszt metódus
+     */
     public void tesztEcske() {
         //RequestContext context = RequestContext.getCurrentInstance();
         //context.execute("PF('megtelt1').show();");

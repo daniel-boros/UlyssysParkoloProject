@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MBeans;
 
 import parkoloPackageDTO.Auto;
@@ -19,8 +14,8 @@ import javax.faces.bean.RequestScoped;
 import MBeans.DataBase;
 
 /**
- *
- * @author User
+ * A parkoloMBean osztály, amely tartalmazza a parkolóhoz tartozó Üzleti Logikát
+ * @author Daniel Boros
  */
 @ManagedBean(name = "parkoloMBean")
 @RequestScoped
@@ -47,6 +42,12 @@ public class ParkoloMBean {
                                                                        
                     ));
 */
+    /**
+     * getParkoloAutoList, egy előre létrehozott "adatbázisból" adja vissza a parkolók előre felvett listáját, 
+     * amit a DataBase osztályban tárolunk autListB néven.
+     * Ezt a @EJB annotáción keresztül érjünk el.
+     * @return ParkoloAutoListát ad vissza 
+     */
     public ArrayList<Parkolo> getParkoloAutoList() {
         return database.getParkoloAutoListB();
     }
@@ -66,7 +67,5 @@ public class ParkoloMBean {
     public void setNev(String nev) {
         this.nev = nev;
     }
-    
-    
     
 }
