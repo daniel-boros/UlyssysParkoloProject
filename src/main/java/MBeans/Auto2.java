@@ -161,6 +161,9 @@ public class Auto2 extends ParkoloMBean implements Serializable {
         if (flag == 0) {
             database.getAutoListB().add(uj);
         }
+        
+        createPieModel();
+        
     }
 
     /**

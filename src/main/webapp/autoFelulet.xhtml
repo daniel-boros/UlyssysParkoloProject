@@ -101,17 +101,8 @@
                 <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-plus" class="btn" value="Auto hozzáadás" onclick="PF('autoPlus').show();" />
                 <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-minus" class="btn" value="Auto törlés" type="button" onclick="PF('autoMinus').show();" />
                 <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-align-justify" class="btn" value="Parkoló" action="parkoloFelulet"/>
-                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-chart-bar" class="btn" value="Diagram" action="#{Auto2bean.createPieModel()}" type="button" onclick="PF('autoDiagram').show();" update=":diagram1:diagg:pan:chart"/>
+                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-chart-bar" class="btn" value="Diagram" action="#{Auto2bean.createPieModel()}" type="button" onclick="PF('autoDiagram').show();" update=":diagram1"/>
             </div>
-        </h:form>
-
-        <h:form id="diagram1">
-            <p:dialog id="diagg"  header="Autó Diagram" widgetVar="autoDiagram" minHeight="40">
-                <p:panel id="pan" style="width: 800px">
-                    <p:ajax event="close" update=":diagram1"/>
-                    <p:pieChart id="chart" model="#{Auto2bean.pieModel}"/>
-                </p:panel>
-            </p:dialog>
         </h:form>
 
         <h:form>
@@ -160,7 +151,14 @@
             <h:outputText value="Minden paraméter megadása kötelező"/><br></br>
             <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" class="btn btn-primary btn-sm" value="Ok" onclick="PF('uresAutoAdd').hide();PF('dlg1').show();"/>
         </p:dialog>
-
+        
+        <h:form id="diagram1">
+            <p:dialog id="dial" header="Autó Diagram" widgetVar="autoDiagram" minHeight="40">
+                <p:panel id="pan" style="width: 800px">
+                    <p:pieChart id="chart" model="#{Auto2bean.pieModel}"/>
+                </p:panel>
+            </p:dialog>
+        </h:form>
 
         <div class="card-body">
             <p:commandButton style="font-style: normal; font-size: x-small; color: #ffffff ; background: #7400b3" icon="pi pi-arrow-left" class="btn btn-lg" value="Vissza" action="index"/>
