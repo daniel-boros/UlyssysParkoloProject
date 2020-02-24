@@ -14,10 +14,9 @@ public class Parkolo {
 
     public ArrayList<Auto> parkoloList;
 
-    public Parkolo(String nev, int ferohely, ArrayList<Auto> parkoloList) {
+    public Parkolo(String nev, int ferohely) {
         this.nev = nev;
         this.ferohely = ferohely;
-        this.parkoloList = parkoloList;
     }
 
     

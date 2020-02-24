@@ -28,7 +28,7 @@ import org.primefaces.model.charts.pie.PieChartModel;
  */
 @ManagedBean(name = "Auto2bean")
 @RequestScoped
-public class Auto2 implements Serializable {
+public class Auto2 extends ParkoloMBean implements Serializable {
 
     @EJB
     private DataBase database;
@@ -40,6 +40,7 @@ public class Auto2 implements Serializable {
     public String parkolo;
     public Date parkKezd;
     public Date parkVeg;
+    public int ferohely;
     public ArrayList<String> parkoloKocsikList = new ArrayList<String>();
     public ArrayList<String> rendszamList = new ArrayList<String>();
     private PieChartModel pieModel;
@@ -183,7 +184,8 @@ public class Auto2 implements Serializable {
 
     /**
      * Egy autó hozzáadása tetszőleges parkolóhoz.
-     * Parkoló beállítása egy autó számára tetszőleges városra/helyre. 
+     * Parkoló beállítása egy autó számára tetszőleges városra/helyre.
+     * Ellenőrzi hogy van-e még szabad parkolóhely az adott parkolóban.
      * Ellenőrzi, hogy a rendszám és parkoló paraméter meglett-e adva.
      * Amennyiben igen, ellenőrzi hogy az autó szerepel-e már abban a parkolóban.
      * Ha nem, hozzáadja, ha pedig igen, hiba üzenetet dob.
@@ -192,9 +194,33 @@ public class Auto2 implements Serializable {
      */
     public void setParkoloTo(String b_rendszam, String b_parkolo) {
         int flag = 0;
-
+        
         System.out.println(b_rendszam + "|" + b_parkolo);
 
+        if (b_parkolo.compareTo("Debrecen") == 0) {
+            if (getParkoloAutoDarabOfDebrecen() == getFerohelyOfDebrecen()) {
+                PrimeRequestContext context = PrimeRequestContext.getCurrentInstance();
+                PrimeFaces.current().executeScript("PF('megteltParkoloDB').show();");
+                return;
+            }
+        }
+        
+        if (b_parkolo.compareTo("Budapest") == 0) {
+            if (getParkoloAutoDarabOfBudapest() == getFerohelyOfBudapest()) {
+                PrimeRequestContext context = PrimeRequestContext.getCurrentInstance();
+                PrimeFaces.current().executeScript("PF('megteltParkoloDB').show();");
+                return;
+            }
+        }
+        
+        if (b_parkolo.compareTo("Győr") == 0) {
+            if (getParkoloAutoDarabOfGyőr() == getFerohelyOfGyőr()) {
+                PrimeRequestContext context = PrimeRequestContext.getCurrentInstance();
+                PrimeFaces.current().executeScript("PF('megteltParkoloDB').show();");
+                return;
+            }
+        }
+        
         if (b_rendszam.isEmpty() || b_rendszam == null || b_parkolo.isEmpty() || b_parkolo == null) {
             //RequestContext context = RequestContext.getCurrentInstance();
             //context.execute("PF('requestRendsz').show();");
@@ -428,7 +454,7 @@ public class Auto2 implements Serializable {
     public void setRendszamList(ArrayList<String> rendszamList) {
         this.rendszamList = rendszamList;
     }
-
+    
     /**
      * Visszadaja a parkolók egy listáját.
      * @return Parkolók listáját adja vissza
@@ -440,7 +466,7 @@ public class Auto2 implements Serializable {
         parkoloKocsikList.add("Győr");
         return parkoloKocsikList;
     }
-
+    
     public void setParkoloList(ArrayList<String> parkoloList) {
         this.parkoloKocsikList = parkoloList;
     }

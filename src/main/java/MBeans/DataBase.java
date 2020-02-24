@@ -34,9 +34,9 @@ public class DataBase {
      */
     private ArrayList<Parkolo> parkoloAutoListB
             = new ArrayList<Parkolo>(Arrays.asList(
-                    new Parkolo("Debrecen", 15, new ArrayList<Auto>(Arrays.asList(new Auto("abc-123", "opel", "corsa", "feher")))),
-                    new Parkolo("Budapest", 25, new ArrayList<Auto>(Arrays.asList(new Auto("bcg-234", "volvo", "850R", "piros")))),
-                    new Parkolo("Győr", 10, new ArrayList<Auto>(Arrays.asList(new Auto("plk-789", "bayerisch motoren werke", "fk-1", "kek"))))
+                    new Parkolo("Debrecen", 3),
+                    new Parkolo("Budapest", 25),
+                    new Parkolo("Győr", 10)
             ));
 
     

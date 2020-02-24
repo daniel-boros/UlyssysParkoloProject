@@ -48,10 +48,101 @@ public class ParkoloMBean {
      * Ezt a @EJB annotáción keresztül érjünk el.
      * @return ParkoloAutoListát ad vissza 
      */
+    
+    public ParkoloMBean() {
+    }
+
     public ArrayList<Parkolo> getParkoloAutoList() {
         return database.getParkoloAutoListB();
     }
+    
+    public int getFerohelyOfDebrecen() {
+        int tmp = 0;
+        
+        for (int i = 0; i < database.getParkoloAutoListB().size(); i++) {
+            if (database.getParkoloAutoListB().get(i).nev.compareTo("Debrecen") == 0) {
+                tmp = database.getParkoloAutoListB().get(i).ferohely;
+            }
+        }
+        
+        return tmp;
+    }
 
+    public int getFerohelyOfBudapest() {
+        int tmp = 0;
+        
+        for (int i = 0; i < database.getParkoloAutoListB().size(); i++) {
+            if (database.getParkoloAutoListB().get(i).nev.compareTo("Budapest") == 0) {
+                tmp = database.getParkoloAutoListB().get(i).ferohely;
+            }
+        }
+        
+        return tmp;
+    }
+    
+    public int getFerohelyOfGyőr() {
+        int tmp = 0;
+        
+        for (int i = 0; i < database.getParkoloAutoListB().size(); i++) {
+            if (database.getParkoloAutoListB().get(i).nev.compareTo("Győr") == 0) {
+                tmp = database.getParkoloAutoListB().get(i).ferohely;
+            }
+        }
+        
+        return tmp;
+    }
+    
+    public int getParkoloAutoDarabOfDebrecen() {
+        
+        ArrayList<Auto> tmp = new ArrayList<Auto>();
+        int count = 0;
+        
+        for (int i = 0; i < database.getAutoListB().size(); i++) {
+            if (database.getAutoListB().get(i).parkolo != null) {
+                if (database.getAutoListB().get(i).parkolo.compareTo("Debrecen") == 0
+                        || database.getAutoListB().get(i).parkolo.compareTo("debrecen") == 0) {
+                    count++;
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    public int getParkoloAutoDarabOfBudapest() {
+        
+        ArrayList<Auto> tmp = new ArrayList<Auto>();
+        int count = 0;
+        
+        for (int i = 0; i < database.getAutoListB().size(); i++) {
+            if (database.getAutoListB().get(i).parkolo != null) {
+                if (database.getAutoListB().get(i).parkolo.compareTo("Budapest") == 0
+                        || database.getAutoListB().get(i).parkolo.compareTo("budapest") == 0) {
+                    count++;
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    public int getParkoloAutoDarabOfGyőr() {
+        
+        ArrayList<Auto> tmp = new ArrayList<Auto>();
+        int count = 0;
+        
+        for (int i = 0; i < database.getAutoListB().size(); i++) {
+            if (database.getAutoListB().get(i).parkolo != null) {
+                if (database.getAutoListB().get(i).parkolo.compareTo("Győr") == 0
+                        || database.getAutoListB().get(i).parkolo.compareTo("győr") == 0) {
+                    count++;
+                }
+            }
+        }
+        
+        return count;
+    }
+    
     public int getFerohely() {
         return ferohely;
     }
