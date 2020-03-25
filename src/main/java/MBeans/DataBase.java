@@ -23,10 +23,10 @@ public class DataBase {
      */
     private ArrayList<Auto> autoListB
             = new ArrayList<Auto>(Arrays.asList(
-                    new Auto("abc-123", "Opel", "corsa", "feher", "Budapest"),
-                    new Auto("bcg-234", "Volvo", "c70", "piros", "Debrecen"),
-                    new Auto("plk-789", "Bmw", "Isetta", "kek", "Győr"),
-                    new Auto("xyz-987", "Mercedes", "Rotschwein", "zold", "Debrecen")
+                    new Auto("HDF-483", "Opel", "Corsa", "fehér", "Budapest"),
+                    new Auto("PNR-782", "Volvo", "c70", "piros", "Debrecen"),
+                    new Auto("AIY-912", "Bmw", "e24", "kék", "Győr"),
+                    new Auto("IJY-633", "Mercedes", "w124", "zöld", "Debrecen")
             ));
 
     /**

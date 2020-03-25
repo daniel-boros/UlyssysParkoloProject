@@ -37,6 +37,17 @@ body {
     background: #ed9d5b;
 }
 
+.tab-btn {
+    font-style: italic;
+    background: #ec6d4c;
+    color: #ffffff;
+    border-color: #ec6d4c;
+}
+
+.tab-btn:hover {
+    background: #ed9d5b;
+}
+
 .wrapper {
     padding-top: 20px;
     display: grid;

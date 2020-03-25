@@ -19,6 +19,7 @@
 
     <h:head>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <link rel="stylesheet" type="text/css" href="./resources/css/style_parkolofelulet.css" />
 
@@ -29,7 +30,7 @@
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
     </h:head>    
     <h:body>
-        
+
         <div class="navbar">
             <div class="nav-cont">
                 <a href="#home">Főoldal</a>
@@ -44,7 +45,7 @@
                 <a href="www.parkhappy.hu/account"><i id="nav-i-usr" class="fas fa-user-circle"></i></a>
             </div>
         </div>
-        
+
         <div class="wrapper">
             <nav class="text">
                 <ul>
@@ -58,6 +59,168 @@
                 </ul>
             </nav>
         </div>
+
+
+        <!-- Table Test -->
+        <h:panelGrid id="grid" style="background-color: #eaf4e9" bgcolor="#eaf4e9" cellpadding="20px" width="50px">
+            <h:form id="for">
+
+                <div class="tab">
+                    <button type="button" class="tab-btn" onclick="openCity('Debrecen')">Debrecen</button>
+                    <button type="button" class="tab-btn" onclick="openCity('Budapest')">Budapest</button>
+                    <button type="button" class="tab-btn" onclick="openCity('Gyor')">Győr</button>
+                </div>
+                <div id="Debrecen" class="w3-container city">
+                    <h:dataTable class="table table-striped" value = "#{Auto2bean.parkoloOfDebrecen}" var="o">
+
+                        <h:column>    				
+                            <f:facet name = "header">Rendszám </f:facet>
+                            <h:outputText value="#{o.rendszam}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Márka </f:facet>
+                            <h:outputText value="#{o.marka}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Típus</f:facet>
+                            <h:outputText value="#{o.tipus}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Szín </f:facet>
+                            <h:outputText value="#{o.szin}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">ParkKezd </f:facet>
+                            <h:outputText value="#{o.parkKezd}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                            </h:outputText>        
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">ParkVég </f:facet>
+                            <h:outputText value="#{o.parkVeg}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                            </h:outputText>
+                        </h:column>
+
+                    </h:dataTable>
+                    <div class="card" style="background: #8aa350; width: 150px">
+                        <div class="card-body" style="background: #8aa350; color: #ffffff">
+                            <h5 class="card-title font-weight-bold">Férőhely </h5>
+
+                            <h:outputText value="#{parkoloMBean.parkoloAutoDarabOfDebrecen}"/>
+                            /
+                            <h:outputText value="#{parkoloMBean.ferohelyOfDebrecen}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Budapest" class="w3-container city" style="display:none">
+                    <h:dataTable class="table table-striped" value = "#{Auto2bean.parkoloOfBudapest}" var="o">
+
+                        <h:column>    				
+                            <f:facet name = "header">Rendszám </f:facet>
+                            <h:outputText value="#{o.rendszam}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Márka </f:facet>
+                            <h:outputText value="#{o.marka}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Típus</f:facet>
+                            <h:outputText value="#{o.tipus}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Szín </f:facet>
+                            <h:outputText value="#{o.szin}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">ParkKezd </f:facet>
+                            <h:outputText value="#{o.parkKezd}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                            </h:outputText>        
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">ParkVég </f:facet>
+                            <h:outputText value="#{o.parkVeg}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                            </h:outputText>
+                        </h:column>
+
+                    </h:dataTable>
+                    <div class="card" style="background: #8aa350; width: 150px">
+                        <div class="card-body" style="background: #8aa350; color: #ffffff">
+                            <h5 class="card-title font-weight-bold">Férőhely </h5>
+
+                            <h:outputText value="#{parkoloMBean.parkoloAutoDarabOfBudapest}"/>
+                            /
+                            <h:outputText value="#{parkoloMBean.ferohelyOfBudapest}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Gyor" class="w3-container city" style="display:none">
+                    <h:dataTable class="table table-striped" value = "#{Auto2bean.parkoloOfGyor}" var="o">
+
+                        <h:column>    				
+                            <f:facet name = "header">Rendszám </f:facet>
+                            <h:outputText value="#{o.rendszam}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Márka </f:facet>
+                            <h:outputText value="#{o.marka}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Típus</f:facet>
+                            <h:outputText value="#{o.tipus}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">Szín </f:facet>
+                            <h:outputText value="#{o.szin}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">ParkKezd </f:facet>
+                            <h:outputText value="#{o.parkKezd}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                            </h:outputText>        
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name = "header">ParkVég </f:facet>
+                            <h:outputText value="#{o.parkVeg}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                            </h:outputText>
+                        </h:column>              
+
+                    </h:dataTable>
+                    <div class="card" style="background: #8aa350; width: 150px">
+                        <div class="card-body" style="background: #8aa350; color: #ffffff">
+                            <h5 class="card-title font-weight-bold">Férőhely </h5>
+
+                            <h:outputText value="#{parkoloMBean.parkoloAutoDarabOfGyőr}"/>
+                            /
+                            <h:outputText value="#{parkoloMBean.ferohelyOfGyőr}"/>
+                        </div>
+                    </div>
+                </div>
+
+            </h:form>
+        </h:panelGrid>
+
+        <!-- Table Test 
 
         <h:form style="padding-top: 30px; padding-left: 50px; padding-right: 50px" id="form1">
             <p:tabView class="tabView" id="tab1">
@@ -229,7 +392,7 @@
                 <p:menuitem value="Autó Felület" action="autoFelulet" icon="pi pi-refresh"/>
             </p:contextMenu>
         </h:form>
-
+        -->
 
         <div id="container" class="container">
             <p:commandButton icon="pi pi-plus-circle" class="btn" value="Parkolóhoz adás" onclick="PF('parkDialog').show();"/>
@@ -242,6 +405,10 @@
         <div class="container">
             <p:commandButton icon="pi pi-arrow-left" class="btn" value="Vissza" action="index"/>
         </div>
+
+
+
+
 
         <h:form>
             <p:dialog header="Hiba" widgetVar="requestRendsz" >
@@ -279,7 +446,7 @@
 
                 <p:separator />
 
-                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkoloTo(Auto2bean.rendszam, Auto2bean.parkolo)}" onclick="PF('parkDialog').hide();"/>
+                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update="for" value="Mentés" action="#{Auto2bean.setParkoloTo(Auto2bean.rendszam, Auto2bean.parkolo)}" onclick="PF('parkDialog').hide();"/>
             </p:dialog>
         </h:form>
 
@@ -299,11 +466,11 @@
                 Kezdés: <p:datePicker value="#{Auto2bean.parkKezd}" timeOnly="true" pattern="HH:mm"/> <br></br>
                 Végzés: <p:datePicker value="#{Auto2bean.parkVeg}" timeOnly="true" pattern="HH:mm"/> <br></br>
                 <p:separator />
-                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form1:tab1" value="Mentés" action="#{Auto2bean.setParkolasTime(Auto2bean.rendszam, Auto2bean.parkKezd, Auto2bean.parkVeg)}" onclick="PF('parkTimeDialog').hide()"/>
+                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update="for" value="Mentés" action="#{Auto2bean.setParkolasTime(Auto2bean.rendszam, Auto2bean.parkKezd, Auto2bean.parkVeg)}" onclick="PF('parkTimeDialog').hide()"/>
 
 
             </p:dialog>
         </h:form>
-
+        <script src="tabs-parkolofelulet.js"></script>
     </h:body>
 </html>
