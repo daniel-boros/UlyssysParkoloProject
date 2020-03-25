@@ -187,7 +187,7 @@ public class Auto2 extends ParkoloMBean implements Serializable {
         createPieModel();
         
     }
-
+    
     /**
      * Egy autó hozzáadása tetszőleges parkolóhoz.
      * Parkoló beállítása egy autó számára tetszőleges városra/helyre.

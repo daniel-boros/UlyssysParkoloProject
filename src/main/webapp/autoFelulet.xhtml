@@ -7,21 +7,10 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Cars</title>
+
         <style type="text/css">
-            div {
-                border-style: solid;
-                border-color: #24292e;
-            }
-            body{
-                border-color:  #24292e;
-            }
             .ui-widget {
                 font-size: 90%;
-            }
-            #container{
-                text-align: center;
-                object-position: center;
             }
             #fejlec{
                 text-align: center;
@@ -33,25 +22,49 @@
                 color: #000000 !important;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="./resources/css/style_autofelulet.css" />
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous" />
 
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-        </link>
         <script src="https://kit.fontawesome.com/ae00d4e42e.js" crossorigin="anonymous"></script>
+        
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />    
+        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Park Happy</title>
 
     </h:head>
 
     <h:body>
-        <div class="card text-center" style="border-color: #24292e">
-            <div id="fejlec" class="card-header" style="background: #24292e; border-color: #24292e" >
-                Ulyssys Kft.
+        
+        <div class="navbar">
+            <div class="nav-cont">
+                <a href="#home">Főoldal</a>
+                <a href="#news">Hírek</a>
+                <a href="#contact">Kapcsolat</a>
+                <a href="#about">Rólunk</a>
             </div>
-            <div class="card-body" style="background: #2f363d; color: #ffffff">
-                <h1 class="card-title font-weight-bold">Autók</h1>
-                <p class="card-text">Kérem válasszon az alábbi opciók közül</p>
-
+            <div class="nav-icon">
+                <a href="www.facebook.com/Parkhappy_hungary"><i id="nav-i-fb" class="fab fa-facebook"></i></a>
+                <a href="www.instagram.hu/Park_happy_hu"><i id="nav-i-ig" class="fab fa-instagram"></i></a>
+                <a href="www.youtube.com/parkhappy_hu"><i id="nav-i-yt" class="fab fa-youtube"></i></a>
+                <a href="www.parkhappy.hu/account"><i id="nav-i-usr" class="fas fa-user-circle"></i></a>
             </div>
+        </div>
+        
+        <div class="wrapper">
+            <nav class="text">
+                <ul>
+                    <div>
+                        <p class="brand">PARK HAPPY</p>
+                    </div>
+                    <div>
+                        <p id="text_park">Parkolt autók</p>
+                    </div>
+                    <br></br>
+                </ul>
+            </nav>
         </div>
 
         <h:form id="form">
@@ -98,15 +111,15 @@
 
         <h:form>
             <div id="container" class="container">
-                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-plus" class="btn" value="Auto hozzáadás" onclick="PF('autoPlus').show();" />
-                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-minus" class="btn" value="Auto törlés" type="button" onclick="PF('autoMinus').show();" />
-                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-align-justify" class="btn" value="Parkoló" action="parkoloFelulet"/>
-                <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-chart-bar" class="btn" value="Diagram" action="#{Auto2bean.createPieModel()}" type="button" onclick="PF('autoDiagram').show();" update=":diagram1"/>
+                <p:commandButton icon="pi pi-plus" class="btn" value="Auto hozzáadás" onclick="PF('autoPlus').show();" />
+                <p:commandButton icon="pi pi-minus" class="btn" value="Auto törlés" type="button" onclick="PF('autoMinus').show();" />
+                <p:commandButton icon="pi pi-align-justify" class="btn" value="Parkoló" action="parkoloFelulet" />
+                <p:commandButton icon="pi pi-chart-bar" class="btn" value="Diagram" action="#{Auto2bean.createPieModel()}" type="button" onclick="PF('autoDiagram').show();" update=":diagram1"/>
             </div>
         </h:form>
 
         <h:form>
-            <p:dialog header="Auto +" widgetVar="autoPlus" minHeight="40">
+            <p:dialog header="Auto +" widgetVar="autoPlus" minHeight="40" class="container">
                 <h:outputText value="Kérem adja meg az autó adatait" /><br></br>
                 <p:separator />
 
@@ -117,13 +130,13 @@
 
                 <br></br>
 
-                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form:dataTable :rendszform :diagram1" class="btn btn-primary" value="Mentés" action="#{Auto2bean.addAction}" onclick="PF('autoPlus').hide();"/>
+                <p:commandButton update=":form:dataTable :rendszform :diagram1" class="btn" value="Mentés" action="#{Auto2bean.addAction}" onclick="PF('autoPlus').hide();"/>
 
             </p:dialog>
         </h:form>
 
         <h:form id="rendszform">    
-            <p:dialog header="Auto -" widgetVar="autoMinus" minHeight="40">
+            <p:dialog header="Auto -" widgetVar="autoMinus" minHeight="40" class="container">
                 <h:outputText value="Kérem adja meg a törelndő autó adatait" /><br></br>
                 <br></br>
 
@@ -133,25 +146,25 @@
                     <f:selectItems id="rendsz" value="#{Auto2bean.rendszamList}" />
                 </p:selectOneMenu>
                 <p:separator />
-                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" update=":form:dataTable" class="btn btn-primary" value="Törlés" action="#{Auto2bean.deleteAction(Auto2bean.rendszam)}" onclick="PF('autoMinus').hide();"/>
+                <p:commandButton update=":form:dataTable" class="btn" value="Törlés" action="#{Auto2bean.deleteAction(Auto2bean.rendszam)}" onclick="PF('autoMinus').hide();"/>
             </p:dialog>
         </h:form>
 
-        <p:dialog header="Hiba" widgetVar="megtelt1" >
+        <p:dialog header="Hiba" widgetVar="megtelt1" class="container">
             <h:outputText id="asd" value="A parkolóban már szerepel ezen rendszámú autó, kérem válasszon másikat"/><br></br>
-            <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" class="btn btn-primary btn-sm" value="Ok" onclick="PF('megtel1').hide();"/>
+            <p:commandButton class="btn" value="Ok" onclick="PF('megtel1').hide();"/>
         </p:dialog>
 
-        <p:dialog header="Hiba" widgetVar="requestRendsz" >
+        <p:dialog header="Hiba" widgetVar="requestRendsz" class="container">
             <h:outputText value="A rendszám paraméter megadása kötelező"/><br></br>
-            <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" class="btn btn-primary btn-sm" value="Ok" onclick="PF('requestRendsz').hide();PF('dlg2').show();"/>
+            <p:commandButton class="btn" value="Ok" onclick="PF('requestRendsz').hide();PF('dlg2').show();"/>
         </p:dialog>
 
-        <p:dialog header="Hiba" widgetVar="uresAutoAdd" >
+        <p:dialog header="Hiba" widgetVar="uresAutoAdd" class="container">
             <h:outputText value="Minden paraméter megadása kötelező"/><br></br>
-            <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" class="btn btn-primary btn-sm" value="Ok" onclick="PF('uresAutoAdd').hide();PF('dlg1').show();"/>
+            <p:commandButton class="btn" value="Ok" onclick="PF('uresAutoAdd').hide();PF('dlg1').show();"/>
         </p:dialog>
-        
+
         <h:form id="diagram1">
             <p:dialog id="dial" header="Autó Diagram" widgetVar="autoDiagram" minHeight="40">
                 <p:panel id="pan" style="width: 800px">
@@ -160,10 +173,22 @@
             </p:dialog>
         </h:form>
 
-        <div class="card-body">
-            <p:commandButton style="font-style: normal; font-size: x-small; color: #ffffff ; background: #7400b3" icon="pi pi-arrow-left" class="btn btn-lg" value="Vissza" action="index"/>
+
+        <div class="container">
+            <p:commandButton icon="pi pi-arrow-left" class="btn" value="Vissza" action="index"/>
         </div>
 
+        <!--<a href="faces/index.xhtml"><button>Vissza</button></a> 
+        
+        <a href="#" onclick="PF('autoPlus').show()"><button onclick="PF('autoPlus').show()">1</button></a>
+        <a href="#" onclick="PF('autoMinus').show();"><button>2</button></a>
+        <a href="#" onclick="PF('autoDiagram').show();"><button>3</button></a>
+        <a><button>4</button></a>
+        
+        <h:form>
+        <h:commandButton value="Auto hozzáadás" onclick="PF('autoPlus').show();"/>
+        </h:form>-->
+        
     </h:body>
 
 </html>

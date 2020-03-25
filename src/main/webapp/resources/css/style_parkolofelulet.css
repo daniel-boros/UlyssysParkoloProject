@@ -1,0 +1,170 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2020.03.23., 18:23:00
+    Author     : Daniel
+*/
+
+html {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+body {
+    background: url(../background.jpg);
+    margin: 30px 50px;
+    line-height: 1.4;
+}
+
+#container{
+    padding-top: 20px;
+    text-align: center;
+    object-position: center;
+}
+
+.container .btn {
+    font-style: italic;
+    background: #ec6d4c;
+    color: #ffffff;
+    border-color: #ec6d4c;
+}
+
+.container .btn:hover {
+    background: #ed9d5b;
+}
+
+.wrapper {
+    padding-top: 20px;
+    display: grid;
+    grid-gap: 20px;
+}
+
+.main-nav ul {
+    display: grid;
+    grid-gap: 20px;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.text {
+    position: relative;
+    top: 30px;
+    display: table-row;
+}
+
+.text a {
+    display: block;
+    text-decoration: none;
+    padding: 0.8rem;
+    text-align: center;
+    background: #ec6d4c;
+    color: #fff;
+    font-size: 0.9rem;
+    width: 150px;
+}
+
+.text p {
+    color: #ec6d4c;
+    font-size: 17px;
+}
+
+#text_park {
+    font-size: 40px;
+    color: #333;
+    font-weight: bold;
+}
+
+#text_orszag {
+    padding-top: 0;
+    font-size: 30px;
+    color: #333;
+    font-weight: lighter;
+}
+
+.tabView .tabCity {
+    background: #eaf4e9;
+}
+
+/* Sticky header */
+.navbar {
+    overflow: hidden;
+    background-color: #8aa350;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    left: 50px;
+    height: 50px;
+    width: 93%; /* Full width */
+    opacity: 0.6;
+}
+
+.nav-cont {
+    padding-left: 1%;
+}
+
+.navbar .nav-cont a {
+    font-weight: bold;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 60px;
+    text-decoration: none;
+}
+
+.navbar i {
+    font-size: 23px;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+}
+
+.navbar .nav-cont a:hover {
+    background: #ddd;
+    color: black;
+}
+
+.navbar .nav-icon {
+}
+
+.navbar .nav-icon a {
+    font-weight: bold;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-radius: 30%;
+    box-shadow: 0 0px 15px -5px #000000;
+}
+
+.navbar .nav-icon a {
+    transition: 0.2s linear;
+}
+
+.navbar .nav-icon a:hover {
+    transform: scale(1.5);
+}
+
+#nav-i-fb {
+    color: #0066ff;
+}
+#nav-i-ig {
+    color: #fc5a03;
+}
+#nav-i-yt {
+    color: #fc0303;
+}
+#nav-i-usr {
+    color: #03dffc;
+}
+
+.navbar .nav-icon a:hover {
+    background: #ddd;
+    color: black;
+}

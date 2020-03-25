@@ -8,33 +8,9 @@
       xmlns:p="http://primefaces.org/ui">
 
     <style>
-        div {
-            border-style: solid;
-            border-color: #24292e;
-        }
-        body{
-            border-color:  #24292e;
-        }
-        .iconInfo {
-            background-color: #30383c;
-            position: fixed;
-            bottom: 0;
-            size: 20;
-            right: 0;
-            width: 260px;
-            color: #ffffff;
-            padding: 0 10px 5px;
-        }
-        table{
-            border-color: #24292e;
-        }
         #container{
             text-align: center;
             object-position: center;
-        }
-        #fejlec{
-            text-align: center;
-            color: #ffffff;
         }
         #tabbb{
             background-color: 2f363d;
@@ -42,7 +18,9 @@
     </style>
 
     <h:head>
-        <title>Carssssss</title>
+
+
+        <link rel="stylesheet" type="text/css" href="./resources/css/style_parkolofelulet.css" />
 
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -51,22 +29,42 @@
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
     </h:head>    
     <h:body>
-        <div class="card text-center" style="border-color: #24292e">
-            <div id="fejlec" class="card-header" style="background: #24292e; border-color: #24292e; color: #ffffff">
-                Ulyssys Kft.
+        
+        <div class="navbar">
+            <div class="nav-cont">
+                <a href="#home">Főoldal</a>
+                <a href="#news">Hírek</a>
+                <a href="#contact">Kapcsolat</a>
+                <a href="#about">Rólunk</a>
             </div>
-            <div class="card-body" style="background: #2f363d; color: #ffffff">
-                <h1 class="card-title font-weight-bold">Parkoló</h1>
-                <p class="card-text">Kérem válasszon az alábbi opciók közül</p>
-
+            <div class="nav-icon">
+                <a href="www.facebook.com/Parkhappy_hungary"><i id="nav-i-fb" class="fab fa-facebook"></i></a>
+                <a href="www.instagram.hu/Park_happy_hu"><i id="nav-i-ig" class="fab fa-instagram"></i></a>
+                <a href="www.youtube.com/parkhappy_hu"><i id="nav-i-yt" class="fab fa-youtube"></i></a>
+                <a href="www.parkhappy.hu/account"><i id="nav-i-usr" class="fas fa-user-circle"></i></a>
             </div>
         </div>
-        <h:form id="form1">
-            <p:tabView id="tab1" style="background-color: #2f363d">
-                <p:tab title="Debrecen">
-                    <h:panelGrid id="grid" style="background-color: #2f363d">
+        
+        <div class="wrapper">
+            <nav class="text">
+                <ul>
+                    <div>
+                        <p>PARK HAPPY</p>
+                    </div>
+                    <div>
+                        <p id="text_park">Országos parkolók</p>
+                    </div>
+                    <br></br>
+                </ul>
+            </nav>
+        </div>
+
+        <h:form style="padding-top: 30px; padding-left: 50px; padding-right: 50px" id="form1">
+            <p:tabView class="tabView" id="tab1">
+                <p:tab class="tabCity" title="Debrecen">
+                    <h:panelGrid id="grid" style="background-color: #eaf4e9" bgcolor="#eaf4e9" cellpadding="20px" width="500px">
                         <p:layoutUnit position="center">
-                            <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfDebrecen}" var="o">
+                            <h:dataTable class="table table-striped" value = "#{Auto2bean.parkoloOfDebrecen}" var="o">
 
                                 <h:column>    				
                                     <f:facet name = "header">Rendszám </f:facet>
@@ -105,9 +103,9 @@
                             </h:dataTable>
                         </p:layoutUnit>
                     </h:panelGrid>
-                    
-                    <div class="card" style="background: #24292e; width: 150px">
-                        <div class="card-body" style="background: #2f363d; color: #ffffff">
+
+                    <div class="card" style="background: #8aa350; width: 150px">
+                        <div class="card-body" style="background: #8aa350; color: #ffffff">
                             <h5 class="card-title font-weight-bold">Férőhely </h5>
 
                             <h:outputText value="#{parkoloMBean.parkoloAutoDarabOfDebrecen}"/>
@@ -115,12 +113,12 @@
                             <h:outputText value="#{parkoloMBean.ferohelyOfDebrecen}"/>
                         </div>
                     </div>
-                    
+
                 </p:tab>
                 <p:tab title="Budapest">
-                    <h:panelGrid style="background-color: #2f363d">
+                    <h:panelGrid style="background-color: #eaf4e9" bgcolor="#eaf4e9" cellpadding="20px" width="500px">
                         <p:layoutUnit position="center">
-                            <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfBudapest}" var="o">
+                            <h:dataTable class="table table-striped" value = "#{Auto2bean.parkoloOfBudapest}" var="o">
 
                                 <h:column>    				
                                     <f:facet name = "header">Rendszám </f:facet>
@@ -159,9 +157,9 @@
                             </h:dataTable>
                         </p:layoutUnit>
                     </h:panelGrid>
-                    
-                    <div class="card" style="background: #24292e; width: 150px">
-                        <div class="card-body" style="background: #2f363d; color: #ffffff">
+
+                    <div class="card" style="background: #8aa350; width: 150px">
+                        <div class="card-body" style="background: #8aa350; color: #ffffff">
                             <h5 class="card-title font-weight-bold">Férőhely </h5>
 
                             <h:outputText value="#{parkoloMBean.parkoloAutoDarabOfBudapest}"/>
@@ -169,12 +167,12 @@
                             <h:outputText value="#{parkoloMBean.ferohelyOfBudapest}"/>
                         </div>
                     </div>
-                    
+
                 </p:tab>
                 <p:tab id="tabbb" title="Győr">
-                    <h:panelGrid style="background-color: #2f363d">
+                    <h:panelGrid style="background-color: #eaf4e9" bgcolor="#eaf4e9" cellpadding="20px" width="500px">
                         <p:layoutUnit position="center">
-                            <h:dataTable class="table table-striped text-info" value = "#{Auto2bean.parkoloOfGyor}" var="o">
+                            <h:dataTable class="table table-striped" value = "#{Auto2bean.parkoloOfGyor}" var="o">
 
                                 <h:column>    				
                                     <f:facet name = "header">Rendszám </f:facet>
@@ -213,9 +211,9 @@
                             </h:dataTable>
                         </p:layoutUnit>
                     </h:panelGrid>
-                    
-                    <div class="card" style="background: #24292e; width: 150px">
-                        <div class="card-body" style="background: #2f363d; color: #ffffff">
+
+                    <div class="card" style="background: #8aa350; width: 150px">
+                        <div class="card-body" style="background: #8aa350; color: #ffffff">
                             <h5 class="card-title font-weight-bold">Férőhely </h5>
 
                             <h:outputText value="#{parkoloMBean.parkoloAutoDarabOfGyőr}"/>
@@ -223,7 +221,7 @@
                             <h:outputText value="#{parkoloMBean.ferohelyOfGyőr}"/>
                         </div>
                     </div>
-                    
+
                 </p:tab>
             </p:tabView>
             <p:contextMenu>
@@ -232,15 +230,19 @@
             </p:contextMenu>
         </h:form>
 
-        <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-plus-circle" class="btn" value="Parkolóhoz adás" onclick="PF('parkDialog').show();"/>
-        <p:commandButton style="font-style: italic; font-size: x-large; color: #ffffff ; background: #0066ff" icon="pi pi-clock" class="btn" value="Parkolás Idő Megadása" onclick="PF('parkTimeDialog').show();"/>
+
+        <div id="container" class="container">
+            <p:commandButton icon="pi pi-plus-circle" class="btn" value="Parkolóhoz adás" onclick="PF('parkDialog').show();"/>
+            <p:commandButton icon="pi pi-clock" class="btn" value="Parkolás Idő Megadása" onclick="PF('parkTimeDialog').show();"/>
+        </div>
+
 
         <br></br>
 
-        <div class="card-body">
-            <p:commandButton style="font-style: normal; font-size: x-small; color: #ffffff ; background: #7400b3" icon="pi pi-arrow-left" class="btn btn-lg" value="Vissza" action="index"/>
+        <div class="container">
+            <p:commandButton icon="pi pi-arrow-left" class="btn" value="Vissza" action="index"/>
         </div>
-        
+
         <h:form>
             <p:dialog header="Hiba" widgetVar="requestRendsz" >
                 <h:outputText value="A rendszám és parkoló paraméter megadása kötelező"/><br></br>
@@ -301,7 +303,6 @@
 
 
             </p:dialog>
-
         </h:form>
 
     </h:body>

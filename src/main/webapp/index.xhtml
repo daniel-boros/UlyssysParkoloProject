@@ -3,83 +3,151 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
-        <style>
-            div {
-                border-style: solid;
-                border-color: #24292e;
-            }
-            .card {
-                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-                transition: 0.3s;   
-            }
 
-            .card:hover {
-                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            }
-            body{
-                border-color:  #24292e;
-            }
-            #fejlec{
-                text-align: center;
-                color: #ffffff;
-            }
+        <link rel="stylesheet" type="text/css" href="./resources/css/style_index.css" />
 
-        </style>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous" />
 
-        <title>Ulyssys Feladat</title>
-
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-        </link>
-        <script src="https://kit.fontawesome.com/ae00d4e42e.js" crossorigin="anonymous"></script>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Park Happy</title>
 
     </h:head>
-    <h:body style="background: #24292e">
-        <h:form>     
-            <div class="card text-center" style="background: #24292e">
-                <div id="fejlec" class="card-header" style="background: #24292e">
-                    Ulyssys Kft.
-                </div>
-                <div class="card-body" style="background: #2f363d; color: #ffffff">
-                    <h1 class="card-title font-weight-bold">Menü</h1>
-                    <p class="card-text">Kérem válasszon az alábbi opciók közül</p>
 
-                </div>
-                <div class="card-footer text-muted" style="background: #24292e">
-                    Itt tarthatja nyílván regisztrált járműveit valamint parkolóit.
-                </div>
+    <h:body>
+
+        <!-- Header 
+        <div class="header" id="Header_index">
+            <p class="brand">PARK HAPPY</p>
+        </div>-->
+
+        <div class="navbar">
+            <div class="nav-cont">
+                <a href="#home">Főoldal</a>
+                <a href="#news">Hírek</a>
+                <a href="#contact">Kapcsolat</a>
+                <a href="#about">Rólunk</a>
             </div>
-
-            <div class="row" >
-                <div class="col-sm-6">
-                    <div class="card" style="background: #24292e">
-                        <div class="card-body" style="background: #2f363d; color: #ffffff">
-                            <h5 class="card-title font-weight-bold">Autó nyilvántartó felület</h5>
-                            <p class="card-text">Lista a jelelegi járművekről, ahol hozzáadhat és törölhet is járműveket.</p>
-
-
-                            <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Tovább" action="autoFelulet"/>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card" style="background: #24292e">
-                        <div class="card-body" style="background: #2f363d; color: #ffffff">
-                            <h5 class="card-title font-weight-bold">Parkoló felület</h5>
-                            <p class="card-text">Megtekintheti az elérhető parkolókat, hozzáadhat új parkolót és parkolási intervallumot </p>
-
-
-                            <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Tovább" action="parkoloFelulet"/>
-
-                        </div>
-                    </div>
-                </div>
+            <div class="nav-icon">
+                <a href="www.facebook.com/Parkhappy_hungary"><i id="nav-i-fb" class="fab fa-facebook"></i></a>
+                <a href="www.instagram.hu/Park_happy_hu"><i id="nav-i-ig" class="fab fa-instagram"></i></a>
+                <a href="www.youtube.com/parkhappy_hu"><i id="nav-i-yt" class="fab fa-youtube"></i></a>
+                <a href="www.parkhappy.hu/account"><i id="nav-i-usr" class="fas fa-user-circle"></i></a>
             </div>
+        </div>
+
+        <h:form>    
+            <p:dialog header="Parkolókártya" widgetVar="kartyamenu">
+                <h:outputText value="Kérem válassza ki az autóját" /><br></br>
+                <br></br>
+
+                Rendszám: 
+                <p:selectOneMenu value="#{Auto2bean.rendszam}" style="width:150px">                                            
+                    <f:selectItem itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{Auto2bean.rendszamList}" />
+                </p:selectOneMenu>
+
+                <p:separator/>
+
+                <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Tovább" onclick="PF('kartyamenu').hide();PF('kartyakep').show()"/>
+            </p:dialog>
+
+            <p:dialog header="Parkolókártya" widgetVar="kartyakep" style="background: #ffffff">
+
+                <h5>765003</h5>
+                <p:barcode value="0123456789" type="pdf417" style="background: #ffffff"/>
+                <p>Fórum parkolóház</p>
+                <p>19.10.30 17:32     Bejárat2</p>
+
+                <h:outputText style="font-size: 15px" value="#{Auto2bean.rendszam}"/>
+
+
+                <p:separator/>
+                <h:outputText style="font-size: 15px" value="Magyar Parkoló Kft."/>
+                <br><h:outputText style="font-size: 10px" value="1024 Budapest"/></br>
+                <h:outputText style="font-size: 10px" value="Váci utca 39."/>
+
+                <p:separator/>
+
+            </p:dialog>
+
         </h:form>
+
+        <!--<section id="buttons">
+                <div>
+                    <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff;" value="Tovább" action="autoFelulet"/>
+                </div>
+                <div>
+                    <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Tovább" action="parkoloFelulet"/>
+                </div>
+                <div>
+                    <p:commandButton style="font-style: italic; color: #ffffff ; background: #0066ff" value="Megjelenítés" onclick="PF('kartyamenu').show()"/>
+                </div>
+        </section>-->
+
+        <div class="wrapper">
+            <!-- Navigation -->
+
+            <!--Text-->
+            <nav class="text">
+                <ul>
+                    <div>
+                        <p class="brand" href="#">PARK HAPPY</p>
+                    </div>
+                    <div>
+                        <p id="text_park">Parkoljon gyorsan és egyszerűen</p>
+                    </div>
+                    <div>
+                        <p id="text_orszag">Az ország teljes területén</p>
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <div>
+                        <p class="para">Parkolóink az ország számos pontján elérhetőek, </p>
+                        <p class="para">foglalja le előre akár mobilon keresztül...</p>
+                    </div>
+                    <div id="discover" class="dropdown">
+                        <button class="dropbtn">Felfedezés</button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <!--<p:commandButton style="background: #ec6d4c; color: #ffffff; border-color: #ec6d4c" class="btn" value="Autó Felület" action="autoFelulet"/>
+                            <p:commandButton style="background: #ec6d4c; color: #ffffff; border-color: #ec6d4c" class="btn" value="Parkoló Felület" action="parkoloFelulet"/>
+                            <p:commandButton style="background: #ec6d4c; color: #ffffff; border-color: #ec6d4c" class="btn" value="Karkoló Kártya" onclick="PF('kartyamenu').show()"/>-->
+                            <a href="http://localhost:8080/mavenproject11/faces/autoFelulet.xhtml">Autó Felület</a>
+                            <a href="http://localhost:8080/mavenproject11/faces/parkoloFelulet.xhtml">Parokló Felület</a>
+                            <a href="#" onclick="PF('kartyamenu').show()">Parkoló Kártya</a>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+
+            <!-- Boxes Section -->
+            <section id="counters" style="border-top-color: #000000" class="boxes">
+                <div class="box">
+                    <i style="color: #8aa350" class="fas fa-car fa-2x"></i>
+                    <div style="color: #8aa350" class="counter" data-target="6015">0</div>
+                    <h2 style="color: #8aa350">Parkolt autók száma</h2>
+                </div>
+                <div class="box">
+                    <i style="color: #ec6d4c" class="fas fa-user fa-2x"></i>
+                    <div style="color: #ec6d4c" class="counter" data-target="2340">0</div>
+                    <h2 style="color: #ec6d4c">Felhasználók</h2>
+                </div>
+                <div class="box">
+                    <i style="color: #ed9d5b" class="far fa-clock fa-2x"></i>
+                    <div style="color: #ed9d5b" class="counter" data-target="43260">0</div>
+                    <h2 style="color: #ed9d5b">Parkolt órák száma</h2>
+                </div>
+            </section>
+
+
+        </div>
+
+        <script src="script.js"></script>
 
     </h:body>
 </html>
